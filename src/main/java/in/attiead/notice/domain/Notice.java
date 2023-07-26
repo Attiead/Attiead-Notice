@@ -1,35 +1,34 @@
 package in.attiead.notice.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+
+import java.util.List;
 
 @Entity
-@Builder
-@Getter
-@AllArgsConstructor
+@SuperBuilder
+@AttributeOverride(name = "id", column = @Column(name = "notice_id", updatable = false))
 @NoArgsConstructor
+@Getter
 public class Notice extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false)
-    private Long id;
-
-    @Column(name = "title", length = 30, nullable = false)
+    @Column(name = "notice_title", length = 30, nullable = false)
     private String title;
 
-    @Column(name = "content", length = 1000, nullable = false)
+    @Column(name = "notice_content", length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "author", length = 10, nullable = false)
+    @Column(name = "notice_author", length = 10, nullable = false)
     private String author;
 
-    @Embedded
-    private Attachment attachment;
+    @OneToMany
+    @Column(name = "notice_attachments")
+    private List<Attachment> attachments;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "notice_state")
     private NoticeState state;
 
     // register notice
