@@ -16,7 +16,7 @@ public class Attachment extends BaseEntity{
     private String filePath;
 
     @ManyToOne
-    @JoinColumn(name = "notice_id")
+    @JoinColumn(name = "notice_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Notice notice;
 
 }

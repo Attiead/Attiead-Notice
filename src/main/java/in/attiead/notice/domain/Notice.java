@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import java.util.List;
-
 @Entity
 @SuperBuilder
 @AttributeOverride(name = "id", column = @Column(name = "id", updatable = false))
