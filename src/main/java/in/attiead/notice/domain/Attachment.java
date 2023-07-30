@@ -9,10 +9,14 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Getter
-@AttributeOverride(name = "id", column = @Column(name = "attachment_id", updatable = false))
+@AttributeOverride(name = "id", column = @Column(name = "id", updatable = false))
 public class Attachment extends BaseEntity{
 
-    @Column(name = "attachment_file_path")
+    @Column(name = "file_path")
     private String filePath;
+
+    @ManyToOne
+    @JoinColumn(name = "notice_id")
+    private Notice notice;
 
 }

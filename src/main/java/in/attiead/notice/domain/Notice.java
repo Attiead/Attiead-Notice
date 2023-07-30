@@ -23,10 +23,6 @@ public class Notice extends BaseEntity {
     @Column(name = "author", length = 10, nullable = false)
     private String author;
 
-    @OneToMany
-    @Column(name = "attachments")
-    private List<Attachment> attachments;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "notice_state")
     private NoticeState state;
