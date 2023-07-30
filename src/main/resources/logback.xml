@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <!-- Environment 내의 프로퍼티들을 개별적으로 설정-->
+    <!-- log file path -->
+    <property name="LOG_PATH" value="./log"/>
+    <!-- log file name -->
+    <property name="LOG_FILE_NAME" value="noticeApp.log"/>
+    <!-- pattern -->
+    <property name="LOG_PATTERN" value="%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"/>
+
+    <!-- Console Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- File Appender-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--파일 경로-->
+        <file>${LOG_PATH}/${LOG_FILE_NAME}</file>
+        <!--출력 패턴-->
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+        <!--Rolling 정책-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 30일 유효 -->
+            <maxHistory>30</maxHistory>
+            <!-- 아카이브 전체 용량-->
+            <totalSizeCap>10GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <logger name="FILE" level="INFO">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <!-- root레벨 설정-->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>
