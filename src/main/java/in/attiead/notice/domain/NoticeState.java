@@ -1,7 +1,7 @@
 package in.attiead.notice.domain;
 
 public enum NoticeState {
-    PUBLIC,
-    PRIVATE,
+    OPEN,
+    HIDDEN,
     RESERVED
 }
