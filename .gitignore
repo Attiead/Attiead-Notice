@@ -238,3 +238,4 @@ gradle-app.setting
 ### Custom
 application.yml
 application-local.yml
+!src/main/java/in/attiead/
