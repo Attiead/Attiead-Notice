@@ -1,31 +1,14 @@
 package in.attiead.notice.domain;
 
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.Value;
 
-@Entity
-@SuperBuilder
-@AttributeOverride(name = "id", column = @Column(name = "id", updatable = false))
-@NoArgsConstructor
-@Getter
-public class Notice extends BaseEntity {
+public class Notice {
 
-    @Column(name = "title", length = 30, nullable = false)
-    private String title;
+    private NoticeId id;
 
-    @Column(name = "content", length = 1000, nullable = false)
-    private String content;
-
-    @Column(name = "author", length = 10, nullable = false)
-    private String author;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "notice_state")
-    private NoticeState state;
-
-    // register notice
-
-    // update notice state
+    @Value
+    public static class NoticeId {
+        Long id;
+    }
 }
+
