@@ -8,7 +8,7 @@ public class Notice {
 
     @Value
     public static class NoticeId {
-        Long value;
+        Long id;
     }
 }
 
