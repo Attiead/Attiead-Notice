@@ -11,4 +11,3 @@ public class Notice {
         Long id;
     }
 }
-
