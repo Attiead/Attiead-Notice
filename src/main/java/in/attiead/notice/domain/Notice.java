@@ -1,9 +1,7 @@
 package in.attiead.notice.domain;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
-@RequiredArgsConstructor
 public class Notice {
 
     private NoticeId id;
