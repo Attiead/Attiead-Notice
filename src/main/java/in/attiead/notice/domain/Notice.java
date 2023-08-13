@@ -1,6 +1,11 @@
 package in.attiead.notice.domain;
 
-import lombok.*;
+import lombok.Value;
+import lombok.Getter;
+import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.AccessLevel;
 
 @Getter
 @Builder
