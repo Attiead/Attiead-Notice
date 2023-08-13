@@ -1,6 +1,5 @@
 package in.attiead.notice.domain;
 
-import jakarta.persistence.Embedded;
 import lombok.*;
 
 @Getter
@@ -21,8 +20,8 @@ public class Notice {
         return new Notice(noticeId, noticeContent, noticeState, noticeCategory);
     }
 
+    @EqualsAndHashCode(callSuper = true)
     @Value
-    public static class NoticeId {
-        Long id;
+        public record NoticeId(Long id) {
     }
 }

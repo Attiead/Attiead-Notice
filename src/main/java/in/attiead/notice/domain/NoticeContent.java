@@ -1,11 +1,10 @@
 package in.attiead.notice.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
+@EqualsAndHashCode(callSuper = true)
 @Value
-public class NoticeContent {
+public record NoticeContent(String title, String content, String author) {
 
-    String title;
-    String content;
-    String author;
 }
