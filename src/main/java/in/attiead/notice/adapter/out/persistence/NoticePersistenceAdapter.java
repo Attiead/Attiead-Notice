@@ -23,7 +23,7 @@ class NoticePersistenceAdapter implements
     public void registerNotice(
             Notice notice,
             NoticeContent noticeContent) {
-        NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToJpaEntity(notice, noticeContent);
+        NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToJpaEntity(notice);
         noticeRepository.save(noticeJpaEntity);
 
     }
