@@ -16,12 +16,19 @@ public class Notice {
             NoticeId noticeId,
             NoticeContent noticeContent,
             NoticeState noticeState,
-            NoticeCategory noticeCategory) {
-        return new Notice(noticeId, noticeContent, noticeState, noticeCategory);
+            NoticeCategory noticeCategory
+    ) {
+        return new Notice(
+                noticeId,
+                noticeContent,
+                noticeState,
+                noticeCategory
+        );
     }
 
     @EqualsAndHashCode(callSuper = true)
     @Value
-        public record NoticeId(Long id) {
+    public record NoticeId(Long id) {
+
     }
 }
