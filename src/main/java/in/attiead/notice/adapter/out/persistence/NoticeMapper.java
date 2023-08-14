@@ -14,6 +14,7 @@ class NoticeMapper {
                                 notice.getNoticeContent().title(),
                                 notice.getNoticeContent().content(),
                                 notice.getNoticeContent().author()
+
                         )
                 )
                 .category(notice.getCategory())
