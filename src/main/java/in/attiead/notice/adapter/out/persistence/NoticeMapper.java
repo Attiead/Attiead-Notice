@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 @Component
 class NoticeMapper {
 
-    NoticeJpaEntity mapToJpaEntity(
-            Notice notice) {
+    NoticeJpaEntity mapToJpaEntity(Notice notice) {
         return NoticeJpaEntity.builder()
-                .id(notice.getNoticeid().getId())
+                .id(notice.getNoticeid().id())
                 .content(
                         new Content(
-                                notice.getNoticeContent().getTitle(),
-                                notice.getNoticeContent().getContent(),
-                                notice.getNoticeContent().getAuthor()
+                                notice.getNoticeContent().title(),
+                                notice.getNoticeContent().content(),
+                                notice.getNoticeContent().author()
+
                         )
                 )
                 .category(notice.getCategory())
