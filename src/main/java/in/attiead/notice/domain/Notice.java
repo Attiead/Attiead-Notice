@@ -1,10 +1,8 @@
 package in.attiead.notice.domain;
 
-import lombok.Value;
 import lombok.Getter;
 import lombok.Builder;
 import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.AccessLevel;
 
 @Getter
@@ -12,7 +10,7 @@ import lombok.AccessLevel;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Notice {
 
-    private NoticeId noticeid;
+    private NoticeId noticeId;
     private NoticeContent noticeContent;
     private NoticeState state;
     private NoticeCategory category;
@@ -31,8 +29,6 @@ public class Notice {
         );
     }
 
-    @EqualsAndHashCode(callSuper = true)
-    @Value
     public record NoticeId(Long id) {
 
     }

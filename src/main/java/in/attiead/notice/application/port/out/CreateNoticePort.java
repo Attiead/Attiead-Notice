@@ -5,5 +5,5 @@ import in.attiead.notice.domain.NoticeContent;
 
 public interface CreateNoticePort {
 
-    void registerNotice(Notice notice, NoticeContent noticeContent);
+    void createNotice(Notice notice);
 }

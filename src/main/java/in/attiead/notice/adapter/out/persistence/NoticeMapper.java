@@ -8,13 +8,12 @@ class NoticeMapper {
 
     NoticeJpaEntity mapToJpaEntity(Notice notice) {
         return NoticeJpaEntity.builder()
-                .id(notice.getNoticeid().id())
+                .id(notice.getNoticeId().id())
                 .content(
                         new Content(
                                 notice.getNoticeContent().title(),
                                 notice.getNoticeContent().content(),
                                 notice.getNoticeContent().author()
-
                         )
                 )
                 .category(notice.getCategory())
