@@ -5,9 +5,8 @@ import in.attiead.notice.domain.NoticeCategory;
 import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeState;
 import jakarta.validation.constraints.NotBlank;
-import lombok.Getter;
 
-@Getter
+
 public record CreateNoticeRequestDto(
         @NotBlank NoticeId noticeId,
         @NotBlank NoticeContent noticeContent,

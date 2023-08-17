@@ -17,9 +17,9 @@ public class CreateNoticeService implements CreateNoticeUseCase {
     @Override
     public void createNotice(CreateNoticeRequestDto createNoticeRequestDto) {
         Notice newNotice = Notice.withId(
-                createNoticeRequestDto.getNoticeId(),
-                createNoticeRequestDto.getNoticeContent(),
-                createNoticeRequestDto.getNoticeState(),
+                createNoticeRequestDto.noticeId(),
+                createNoticeRequestDto.noticeContent(),
+                createNoticeRequestDto.noticeState(),
                 createNoticeRequestDto.noticeCategory()
         );
         createNoticePort.createNotice(newNotice);
