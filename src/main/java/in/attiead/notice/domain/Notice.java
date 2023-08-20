@@ -1,9 +1,9 @@
 package in.attiead.notice.domain;
 
-import lombok.Getter;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder
@@ -17,15 +17,13 @@ public class Notice {
 
     public static Notice withId(
             NoticeId noticeId,
-            NoticeContent noticeContent,
-            NoticeState noticeState,
-            NoticeCategory noticeCategory
+            NoticeContent noticeContent
     ) {
         return new Notice(
                 noticeId,
                 noticeContent,
-                noticeState,
-                noticeCategory
+                NoticeState.ACTIVE,
+                NoticeCategory.OPERATE
         );
     }
 
