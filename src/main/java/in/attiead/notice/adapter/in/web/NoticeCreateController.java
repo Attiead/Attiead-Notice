@@ -2,6 +2,8 @@ package in.attiead.notice.adapter.in.web;
 
 import in.attiead.notice.application.port.in.CreateNoticeRequestDto;
 import in.attiead.notice.application.port.in.CreateNoticeUseCase;
+import in.attiead.notice.application.port.out.ResponseDto;
+import in.attiead.notice.common.MetaCode;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,8 +29,9 @@ class NoticeCreateController {
     private final CreateNoticeUseCase createNoticeUseCase;
 
     @PostMapping
-    public void createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
+    public ResponseDto<MetaCode> createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
         createNoticeUseCase.createNotice(createNoticeRequestDto);
+        return ResponseDto.success(MetaCode.SUCCESS);
     }
 }
 

@@ -28,6 +28,4 @@ class NoticePersistenceAdapter implements
     public Notice updateNoticeState(NoticeState noticeState) {
         return null;
     }
-
-
 }
