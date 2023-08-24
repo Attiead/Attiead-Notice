@@ -31,7 +31,7 @@ class NoticeCreateController {
     @PostMapping
     public ResponseDto<MetaCode> createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
         createNoticeUseCase.createNotice(createNoticeRequestDto);
-        return ResponseDto.success(MetaCode.SUCCESS);
+        return ResponseDto.success(null);
     }
 }
 
