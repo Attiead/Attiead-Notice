@@ -1,38 +1,32 @@
 package in.attiead.notice.domain;
 
-import lombok.Value;
-import lombok.Getter;
-import lombok.Builder;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 
 @Getter
 @Builder
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Notice {
 
-    private NoticeId noticeid;
+    private NoticeId noticeId;
     private NoticeContent noticeContent;
     private NoticeState state;
     private NoticeCategory category;
 
     public static Notice withId(
             NoticeId noticeId,
-            NoticeContent noticeContent,
-            NoticeState noticeState,
-            NoticeCategory noticeCategory
+            NoticeContent noticeContent
     ) {
         return new Notice(
                 noticeId,
                 noticeContent,
-                noticeState,
-                noticeCategory
+                NoticeState.ACTIVE,
+                NoticeCategory.OPERATE
         );
     }
 
-    @EqualsAndHashCode(callSuper = true)
-    @Value
     public record NoticeId(Long id) {
 
     }

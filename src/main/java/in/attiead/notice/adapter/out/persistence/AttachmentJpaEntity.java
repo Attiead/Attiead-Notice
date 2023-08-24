@@ -10,7 +10,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Getter
 public class AttachmentJpaEntity extends BaseEntity {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "file_path")

@@ -3,7 +3,6 @@ package in.attiead.notice.adapter.out.persistence;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.domain.Notice;
-import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeState;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
@@ -20,18 +19,13 @@ class NoticePersistenceAdapter implements
     private NoticeMapper noticeMapper;
 
     @Override
-    public void registerNotice(
-            Notice notice,
-            NoticeContent noticeContent) {
+    public void createNotice(Notice notice) {
         NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToJpaEntity(notice);
         noticeRepository.save(noticeJpaEntity);
-
     }
 
     @Override
     public Notice updateNoticeState(NoticeState noticeState) {
         return null;
     }
-
-
 }

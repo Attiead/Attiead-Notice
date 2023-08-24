@@ -3,7 +3,7 @@ package in.attiead.notice.application.port.in;
 import org.springframework.stereotype.Component;
 
 @Component
-public interface RegisterNoticeUseCase {
+public interface CreateNoticeUseCase {
 
-    boolean register(RegisterNoticeCommand command);
+    void createNotice(CreateNoticeRequestDto createNoticeRequestDto);
 }
