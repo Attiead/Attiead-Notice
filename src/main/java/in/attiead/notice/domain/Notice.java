@@ -10,12 +10,21 @@ import lombok.Getter;
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Notice {
 
-    private NoticeId noticeId;
-    private NoticeContent noticeContent;
-    private NoticeState state;
-    private NoticeCategory category;
+    private final NoticeId noticeId;
+    private final NoticeContent noticeContent;
+    private final NoticeState state;
+    private final NoticeCategory category;
 
-    public static Notice withId(
+    public static Notice withoutNoticeId(NoticeContent noticeContent) {
+        return new Notice(
+                null,
+                noticeContent,
+                NoticeState.ACTIVE,
+                NoticeCategory.OPERATE
+        );
+    }
+
+    public static Notice withNoticeId(
             NoticeId noticeId,
             NoticeContent noticeContent
     ) {

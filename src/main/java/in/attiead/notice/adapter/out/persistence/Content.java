@@ -16,6 +16,6 @@ public class Content {
     @Column(name = "content", length = 1000, nullable = false)
     private String content;
 
-    @Column(name = "author", length = 10, nullable = false)
+    @Column(name = "author", length = 20, nullable = false)
     private String author;
 }

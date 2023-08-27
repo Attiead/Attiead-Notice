@@ -1,14 +1,16 @@
 package in.attiead.notice.adapter.out.persistence;
 
 import in.attiead.notice.domain.Notice;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor
 class NoticeMapper {
 
     NoticeJpaEntity mapToJpaEntity(Notice notice) {
         return NoticeJpaEntity.builder()
-                .id(notice.getNoticeId().id())
+                .id(null)
                 .content(
                         new Content(
                                 notice.getNoticeContent().title(),

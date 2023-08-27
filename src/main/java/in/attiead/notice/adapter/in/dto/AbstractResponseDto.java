@@ -1,5 +1,6 @@
-package in.attiead.notice.common;
+package in.attiead.notice.adapter.in.dto;
 
+import in.attiead.notice.common.Meta;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

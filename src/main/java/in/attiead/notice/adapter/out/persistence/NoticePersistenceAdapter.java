@@ -1,22 +1,22 @@
 package in.attiead.notice.adapter.out.persistence;
 
 import in.attiead.notice.application.port.out.CreateNoticePort;
+import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.NoticeState;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@AllArgsConstructor
 class NoticePersistenceAdapter implements
         CreateNoticePort,
-        UpdateNoticeStatePort {
+        UpdateNoticeStatePort,
+        RemoveNoticePort {
 
-    private NoticeRepository noticeRepository;
-    private NoticeMapper noticeMapper;
+    private final NoticeRepository noticeRepository;
+    private final NoticeMapper noticeMapper;
 
     @Override
     public void createNotice(Notice notice) {
@@ -27,5 +27,10 @@ class NoticePersistenceAdapter implements
     @Override
     public Notice updateNoticeState(NoticeState noticeState) {
         return null;
+    }
+
+    @Override
+    public void deleteNotice(Long nId) {
+        noticeRepository.deleteById(nId);
     }
 }
