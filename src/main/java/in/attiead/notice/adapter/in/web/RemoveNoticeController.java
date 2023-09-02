@@ -1,7 +1,7 @@
 package in.attiead.notice.adapter.in.web;
 
-import in.attiead.notice.application.port.in.RemoveNoticeUseCase;
 import in.attiead.notice.adapter.in.dto.ResponseDto;
+import in.attiead.notice.application.port.in.RemoveNoticeUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +16,8 @@ class RemoveNoticeController {
     private final RemoveNoticeUseCase removeNoticeUseCase;
 
     @DeleteMapping("/{nid}")
-    public ResponseDto deleteNotice(@PathVariable Long nid) {
-        removeNoticeUseCase.deleteNotice(nid);
+    public ResponseDto removeNotice(@PathVariable Long nid) {
+        removeNoticeUseCase.removeNotice(nid);
         return ResponseDto.success(null);
     }
 }

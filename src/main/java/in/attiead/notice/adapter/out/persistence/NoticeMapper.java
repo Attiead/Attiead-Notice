@@ -10,7 +10,6 @@ class NoticeMapper {
 
     NoticeJpaEntity mapToJpaEntity(Notice notice) {
         return NoticeJpaEntity.builder()
-                .id(null)
                 .content(
                         new Content(
                                 notice.getNoticeContent().title(),

@@ -12,7 +12,7 @@ public class RemoveNoticeService implements RemoveNoticeUseCase {
     private final RemoveNoticePort removeNoticePort;
 
     @Override
-    public void deleteNotice(Long nid) {
+    public void removeNotice(Long nid) {
         removeNoticePort.deleteNotice(nid);
     }
 }
