@@ -1,4 +1,4 @@
-package in.attiead.notice.application.port.in;
+package in.attiead.notice.adapter.in.dto;
 
 import in.attiead.notice.domain.NoticeContent;
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +7,7 @@ public record CreateNoticeRequestDto(
         @NotBlank String title,
         @NotBlank String content,
         @NotBlank String author
+
 ) {
     public NoticeContent mapToNoticeContent() {
         return new NoticeContent(

@@ -1,38 +1,40 @@
 package in.attiead.notice.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
-@Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Notice {
 
     private final NoticeId noticeId;
-    private final NoticeContent noticeContent;
-    private final NoticeState state;
-    private final NoticeCategory category;
+    private NoticeContent content;
+    private NoticeState state;
+    private NoticeCategory category;
+    private NoticeTimeInfo timeInfo;
 
-    public static Notice withoutNoticeId(NoticeContent noticeContent) {
-        return new Notice(
-                null,
-                noticeContent,
-                NoticeState.ACTIVE,
-                NoticeCategory.OPERATE
-        );
+    public Notice(NoticeId noticeId) {
+        this.noticeId = noticeId;
     }
 
-    public static Notice withNoticeId(
-            NoticeId noticeId,
-            NoticeContent noticeContent
-    ) {
+    @Builder
+    public Notice(NoticeId noticeId, NoticeContent noticeContent, NoticeState noticeState, NoticeCategory noticeCategory, NoticeTimeInfo noticeTimeInfo) {
+        this.noticeId = noticeId;
+        this.content = noticeContent;
+        this.state = noticeState;
+        this.category = noticeCategory;
+        this.timeInfo = noticeTimeInfo;
+    }
+
+    public static Notice withLongId(Long nId) {
+        return new Notice(new NoticeId(nId));
+    }
+
+    public static Notice withoutLongId(NoticeContent noticeContent) {
         return new Notice(
-                noticeId,
+                new NoticeId(null),
                 noticeContent,
                 NoticeState.ACTIVE,
-                NoticeCategory.OPERATE
+                NoticeCategory.OPERATE,
+                null
         );
     }
 

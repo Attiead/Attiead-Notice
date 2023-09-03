@@ -1,6 +1,6 @@
 package in.attiead.notice.adapter.in.web;
 
-import in.attiead.notice.application.port.in.CreateNoticeRequestDto;
+import in.attiead.notice.adapter.in.dto.CreateNoticeRequestDto;
 import in.attiead.notice.application.port.in.CreateNoticeUseCase;
 import in.attiead.notice.adapter.in.dto.ResponseDto;
 import jakarta.validation.Valid;

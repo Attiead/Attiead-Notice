@@ -1,6 +1,8 @@
 package in.attiead.notice.application.port.out;
 
+import in.attiead.notice.domain.Notice;
+
 public interface RemoveNoticePort {
 
-    void deleteNotice(Long nId);
+    void deleteNotice(Notice notice);
 }
