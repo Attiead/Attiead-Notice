@@ -1,8 +1,7 @@
 package in.attiead.notice.application.port.in;
 
-import org.springframework.stereotype.Component;
+import in.attiead.notice.adapter.in.dto.CreateNoticeRequestDto;
 
-@Component
 public interface CreateNoticeUseCase {
 
     void createNotice(CreateNoticeRequestDto createNoticeRequestDto);

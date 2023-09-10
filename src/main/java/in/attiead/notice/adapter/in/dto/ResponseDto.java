@@ -1,6 +1,5 @@
-package in.attiead.notice.application.port.out;
+package in.attiead.notice.adapter.in.dto;
 
-import in.attiead.notice.common.AbstractResponseDto;
 import in.attiead.notice.common.Meta;
 import in.attiead.notice.common.MetaCode;
 import lombok.Getter;
