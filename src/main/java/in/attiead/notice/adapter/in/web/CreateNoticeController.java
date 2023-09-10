@@ -28,7 +28,7 @@ class CreateNoticeController {
     private final CreateNoticeUseCase createNoticeUseCase;
 
     @PostMapping
-    public ResponseDto createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
+    public ResponseDto<Void> createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
         createNoticeUseCase.createNotice(createNoticeRequestDto);
         return ResponseDto.success(null);
     }

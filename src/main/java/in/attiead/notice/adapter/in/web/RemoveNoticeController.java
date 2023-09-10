@@ -15,9 +15,9 @@ class RemoveNoticeController {
 
     private final RemoveNoticeUseCase removeNoticeUseCase;
 
-    @DeleteMapping("/{nid}")
-    public ResponseDto removeNotice(@PathVariable Long nid) {
-        removeNoticeUseCase.removeNotice(nid);
+    @DeleteMapping("/{nId}")
+    public ResponseDto<Void> removeNotice(@PathVariable Long nId) {
+        removeNoticeUseCase.removeNotice(nId);
         return ResponseDto.success(null);
     }
 }

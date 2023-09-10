@@ -5,6 +5,7 @@ import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.application.port.out.RetrieveNoticeInfoPort;
 import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.domain.Notice;
+import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -35,8 +36,8 @@ class NoticePersistenceAdapter implements
     }
 
     @Override
-    public void deleteNotice(Notice notice) {
-        noticeRepository.deleteById(notice.getNoticeId().id());
+    public void deleteNotice(NoticeId noticeId) {
+        noticeRepository.deleteById(noticeId.id());
     }
 
     @Override
