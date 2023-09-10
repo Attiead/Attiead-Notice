@@ -17,7 +17,7 @@ public class CreateNoticeService implements CreateNoticeUseCase {
     @Transactional
     @Override
     public void createNotice(CreateNoticeRequestDto createNoticeRequestDto) {
-        Notice newNotice = Notice.withoutNoticeId(createNoticeRequestDto.mapToNoticeContent());
+        Notice newNotice = Notice.withoutLongId(createNoticeRequestDto.mapToNoticeContent());
         createNoticePort.createNotice(newNotice);
     }
 }
