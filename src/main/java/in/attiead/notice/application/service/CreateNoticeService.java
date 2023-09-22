@@ -1,6 +1,6 @@
 package in.attiead.notice.application.service;
 
-import in.attiead.notice.application.port.in.CreateNoticeRequestDto;
+import in.attiead.notice.adapter.in.dto.CreateNoticeRequestDto;
 import in.attiead.notice.application.port.in.CreateNoticeUseCase;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.domain.Notice;
@@ -14,8 +14,8 @@ public class CreateNoticeService implements CreateNoticeUseCase {
 
     private final CreateNoticePort createNoticePort;
 
-    @Transactional
     @Override
+    @Transactional
     public void createNotice(CreateNoticeRequestDto createNoticeRequestDto) {
         Notice newNotice = Notice.withoutLongId(createNoticeRequestDto.mapToNoticeContent());
         createNoticePort.createNotice(newNotice);

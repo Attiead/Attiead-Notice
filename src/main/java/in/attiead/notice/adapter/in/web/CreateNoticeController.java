@@ -1,6 +1,6 @@
 package in.attiead.notice.adapter.in.web;
 
-import in.attiead.notice.application.port.in.CreateNoticeRequestDto;
+import in.attiead.notice.adapter.in.dto.CreateNoticeRequestDto;
 import in.attiead.notice.application.port.in.CreateNoticeUseCase;
 import in.attiead.notice.adapter.in.dto.ResponseDto;
 import jakarta.validation.Valid;
@@ -28,7 +28,7 @@ class CreateNoticeController {
     private final CreateNoticeUseCase createNoticeUseCase;
 
     @PostMapping
-    public ResponseDto createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
+    public ResponseDto<Void> createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
         createNoticeUseCase.createNotice(createNoticeRequestDto);
         return ResponseDto.success(null);
     }

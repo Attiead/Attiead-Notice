@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/notices")
+@RequestMapping("/api/v1/notices/delete")
 class RemoveNoticeController {
 
-  private final RemoveNoticeUseCase removeNoticeUseCase;
+    private final RemoveNoticeUseCase removeNoticeUseCase;
 
-  @DeleteMapping("/{nId}")
-  public ResponseDto<Void> removeNotice(@PathVariable Long nId) {
-    removeNoticeUseCase.removeNotice(nId);
-    return ResponseDto.success(null);
-  }
+    @DeleteMapping("/{nId}")
+    public ResponseDto<Void> removeNotice(@PathVariable Long nId) {
+        removeNoticeUseCase.removeNotice(nId);
+        return ResponseDto.success(null);
+    }
 }

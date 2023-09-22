@@ -1,10 +1,8 @@
 package in.attiead.notice.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
-@Builder
 public class Notice {
 
     private final NoticeId noticeId;
