@@ -1,7 +1,6 @@
 package in.attiead.notice.adapter.in.dto;
 
 import jakarta.validation.constraints.NotNull;
-
 import java.time.LocalDateTime;
 
 public record NoticeInfoResponseDto(

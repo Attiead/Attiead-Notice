@@ -1,11 +1,12 @@
 package in.attiead.notice.application.port.in;
 
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface RetrieveNoticeUseCase {
 
     NoticeInfoResponseDto retrieveSingleNoticeInfo(Long nId);
 
-    List<NoticeInfoResponseDto> retrieveMultiNoticeInfo(Long nId);
+    Page<NoticeInfoResponseDto> retrieveMultiNoticeInfo(Pageable pageable);
 }

@@ -1,5 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.application.port.out.RetrieveNoticeInfoPort;
@@ -7,18 +8,16 @@ import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeState;
-import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class NoticePersistenceAdapter implements
-    CreateNoticePort,
-    RetrieveNoticeInfoPort,
-    UpdateNoticeStatePort,
-    RemoveNoticePort {
+class NoticePersistenceAdapter implements CreateNoticePort, RetrieveNoticeInfoPort,
+    UpdateNoticeStatePort, RemoveNoticePort {
 
   private final NoticeRepository noticeRepository;
   private final NoticeMapper noticeMapper;
@@ -41,18 +40,13 @@ class NoticePersistenceAdapter implements
 
   @Override
   public Notice retrieveSingleNoticeInfo(Notice notice) {
-    Optional<NoticeJpaEntity> noticeJpaEntity = noticeRepository.findById(
-        notice.getNoticeId().id());
-    if (noticeJpaEntity.isPresent()) {
-      noticeMapper.mapToDomainEntity(noticeJpaEntity);
-    }
-
-    return null;
-
+    Optional<NoticeJpaEntity> noticeJpaEntity = noticeRepository.findById(notice.getNoticeId().id());
+    return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 
   @Override
-  public List<Notice> retrieveMultiNoticeInfo(Notice notice) {
-    return null;
+  public Page<NoticeInfoResponseDto> retrieveMultiNoticeInfo(Pageable pageable) {
+    Page<NoticeJpaEntity> noticePageJpaEntity = noticeRepository.findAll(pageable);
+    return noticePageJpaEntity.map(noticeMapper::mapToNoticeInfoResponseDto);
   }
 }
