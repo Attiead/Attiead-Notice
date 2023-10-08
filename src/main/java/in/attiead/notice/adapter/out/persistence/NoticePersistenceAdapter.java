@@ -3,7 +3,7 @@ package in.attiead.notice.adapter.out.persistence;
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.RemoveNoticePort;
-import in.attiead.notice.application.port.out.RetrieveNoticeInfoPort;
+import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class NoticePersistenceAdapter implements CreateNoticePort, RetrieveNoticeInfoPort,
+class NoticePersistenceAdapter implements CreateNoticePort, GetNoticeInfoPort,
     UpdateNoticeStatePort, RemoveNoticePort {
 
   private final NoticeRepository noticeRepository;
@@ -39,13 +39,13 @@ class NoticePersistenceAdapter implements CreateNoticePort, RetrieveNoticeInfoPo
   }
 
   @Override
-  public Notice retrieveSingleNoticeInfo(Notice notice) {
+  public Notice getSingleNoticeInfo(Notice notice) {
     Optional<NoticeJpaEntity> noticeJpaEntity = noticeRepository.findById(notice.getNoticeId().id());
     return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 
   @Override
-  public Page<NoticeInfoResponseDto> retrieveMultiNoticeInfo(Pageable pageable) {
+  public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {
     Page<NoticeJpaEntity> noticePageJpaEntity = noticeRepository.findAll(pageable);
     return noticePageJpaEntity.map(noticeMapper::mapToNoticeInfoResponseDto);
   }

@@ -5,9 +5,10 @@ import in.attiead.notice.domain.Notice;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface RetrieveNoticeInfoPort {
+public interface GetNoticeInfoPort {
 
-    Notice retrieveSingleNoticeInfo(Notice notice);
+    Notice getSingleNoticeInfo(Notice notice);
 
-    Page<NoticeInfoResponseDto> retrieveMultiNoticeInfo(Pageable pageable);
+    Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
+
 }

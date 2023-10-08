@@ -31,11 +31,11 @@ public class Notice {
     this.timeInfo = noticeTimeInfo;
   }
 
-  public static Notice withLongId(Long nId) {
+  public static Notice onlyId(Long nId) {
     return new Notice(new NoticeId(nId));
   }
 
-  public static Notice withoutLongId(NoticeContent noticeContent) {
+  public static Notice withoutId(NoticeContent noticeContent) {
     return new Notice(
         new NoticeId(null),
         noticeContent,

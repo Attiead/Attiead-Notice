@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/notices/delete")
+@RequestMapping("/api/v1/notices/")
 class RemoveNoticeController {
 
     private final RemoveNoticeUseCase removeNoticeUseCase;

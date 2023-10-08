@@ -29,23 +29,24 @@ public class NoticeMapper {
   }
 
   Notice mapToDomainEntity(Optional<NoticeJpaEntity> noticeJpaEntity) {
+    noticeJpaEntity.orElseThrow();
     return Notice.builder()
         .noticeId(
-            new NoticeId(noticeJpaEntity.orElseThrow().getId())
+            new NoticeId(noticeJpaEntity.get().getId())
         )
         .noticeContent(
             new NoticeContent(
-                noticeJpaEntity.orElseThrow().getContent().getTitle(),
-                noticeJpaEntity.orElseThrow().getContent().getContent(),
-                noticeJpaEntity.orElseThrow().getContent().getAuthor()
+                noticeJpaEntity.get().getContent().getTitle(),
+                noticeJpaEntity.get().getContent().getContent(),
+                noticeJpaEntity.get().getContent().getAuthor()
             )
         )
-        .noticeCategory(noticeJpaEntity.orElseThrow().getCategory())
-        .noticeState(noticeJpaEntity.orElseThrow().getState())
+        .noticeCategory(noticeJpaEntity.get().getCategory())
+        .noticeState(noticeJpaEntity.get().getState())
         .noticeTimeInfo(
             new NoticeTimeInfo(
-                noticeJpaEntity.orElseThrow().getCreatedAt(),
-                noticeJpaEntity.orElseThrow().getUpdatedAt()
+                noticeJpaEntity.get().getCreatedAt(),
+                noticeJpaEntity.get().getUpdatedAt()
             )
         )
         .build();
