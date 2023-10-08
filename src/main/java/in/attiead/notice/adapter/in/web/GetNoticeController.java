@@ -22,6 +22,7 @@ class GetNoticeController {
   public ResponseDto<NoticeInfoResponseDto> getSingleNoticeInfo(@PathVariable Long nId) {
     NoticeInfoResponseDto noticeInfoResponseDto = getNoticeUseCase.getSingleNoticeInfo(
         nId);
+
     return ResponseDto.success(noticeInfoResponseDto);
   }
 
@@ -29,6 +30,7 @@ class GetNoticeController {
   public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(Pageable pageable) {
     Page<NoticeInfoResponseDto> noticePageInfoResponseDto = getNoticeUseCase.getNotices(
         pageable);
+
     return ResponseDto.success(noticePageInfoResponseDto);
   }
 }
