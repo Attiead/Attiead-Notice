@@ -1,6 +1,7 @@
 package in.attiead.notice.adapter.out.persistence;
 
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
+import in.attiead.notice.common.exception.NotFoundException;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeContent;
@@ -29,7 +30,9 @@ public class NoticeMapper {
   }
 
   Notice mapToDomainEntity(Optional<NoticeJpaEntity> noticeJpaEntity) {
-    noticeJpaEntity.orElseThrow();
+    if (noticeJpaEntity.isEmpty()) {
+      throw new NotFoundException("noticeJpaEntity not found", noticeJpaEntity);
+    }
     return Notice.builder()
         .noticeId(
             new NoticeId(noticeJpaEntity.get().getId())
@@ -64,6 +67,7 @@ public class NoticeMapper {
         notice.getTimeInfo().updatedAt()
     );
   }
+
   public NoticeInfoResponseDto mapToNoticeInfoResponseDto(NoticeJpaEntity noticeJpaEntity) {
     return new NoticeInfoResponseDto(
         noticeJpaEntity.getId(),
