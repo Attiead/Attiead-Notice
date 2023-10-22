@@ -5,12 +5,11 @@ import in.attiead.notice.adapter.in.dto.ResponseDto;
 import in.attiead.notice.application.port.in.GetNoticeUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -27,8 +26,7 @@ class GetNoticeController {
   }
 
   @GetMapping
-  public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(@RequestParam(required = false) Integer page) {
-      Pageable pageable = PageRequest.of(page - 1, 10);
+  public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(@PageableDefault(size = 10) Pageable pageable) {
       Page<NoticeInfoResponseDto> noticePageInfoResponsDto = getNoticeUseCase.getNotices(pageable);
       return ResponseDto.success(noticePageInfoResponsDto);
     }
