@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface GetNoticeUseCase {
 
-    NoticeInfoResponseDto getSingleNoticeInfo(Long nId);
+  NoticeInfoResponseDto getSingleNoticeInfo(Long nId);
 
-    Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
+  Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
 
 }

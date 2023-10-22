@@ -46,7 +46,7 @@ public class GlobalExceptionHandler implements Log {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ResponseDto<Object>> handleUnhandledException(Exception error) {
-    getLogger().error(error.getMessage(), error);
+    logger().error(error.getMessage(), error);
 
     return createErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR,

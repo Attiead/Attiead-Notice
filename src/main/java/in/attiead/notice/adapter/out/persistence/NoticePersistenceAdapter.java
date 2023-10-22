@@ -2,13 +2,13 @@ package in.attiead.notice.adapter.out.persistence;
 
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.application.port.out.CreateNoticePort;
-import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.application.port.out.GetNoticeInfoPort;
+import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
+import in.attiead.notice.common.exception.NotFoundException;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeState;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,8 +16,11 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class NoticePersistenceAdapter implements CreateNoticePort, GetNoticeInfoPort,
-    UpdateNoticeStatePort, RemoveNoticePort {
+class NoticePersistenceAdapter implements
+    CreateNoticePort,
+    GetNoticeInfoPort,
+    UpdateNoticeStatePort,
+    RemoveNoticePort {
 
   private final NoticeRepository noticeRepository;
   private final NoticeMapper noticeMapper;
@@ -40,7 +43,9 @@ class NoticePersistenceAdapter implements CreateNoticePort, GetNoticeInfoPort,
 
   @Override
   public Notice getSingleNoticeInfo(Notice notice) {
-    Optional<NoticeJpaEntity> noticeJpaEntity = noticeRepository.findById(notice.getNoticeId().id());
+    NoticeJpaEntity noticeJpaEntity = noticeRepository
+        .findById(notice.getNoticeId().id())
+        .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
     return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 

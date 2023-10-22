@@ -41,7 +41,7 @@ public class Notice {
         noticeContent,
         NoticeState.ACTIVE,
         NoticeCategory.OPERATE,
-        null
+        new NoticeTimeInfo(null, null)
     );
   }
 
@@ -49,4 +49,3 @@ public class Notice {
 
   }
 }
-

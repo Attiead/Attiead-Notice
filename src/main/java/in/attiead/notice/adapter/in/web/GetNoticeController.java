@@ -20,10 +20,9 @@ class GetNoticeController {
 
   private final GetNoticeUseCase getNoticeUseCase;
 
-  @GetMapping("/{nId}")
-  public ResponseDto<NoticeInfoResponseDto> getSingleNoticeInfo(@PathVariable Long nId) {
-    NoticeInfoResponseDto noticeInfoResponseDto = getNoticeUseCase.getSingleNoticeInfo(nId);
-
+  @GetMapping("/{nid}")
+  public ResponseDto<NoticeInfoResponseDto> getSingleNoticeInfo(@PathVariable Long nid) {
+    NoticeInfoResponseDto noticeInfoResponseDto = getNoticeUseCase.getSingleNoticeInfo(nid);
     return ResponseDto.success(noticeInfoResponseDto);
   }
 
@@ -31,7 +30,6 @@ class GetNoticeController {
   public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(@RequestParam(required = false) Integer page) {
       Pageable pageable = PageRequest.of(page - 1, 10);
       Page<NoticeInfoResponseDto> noticePageInfoResponsDto = getNoticeUseCase.getNotices(pageable);
-
       return ResponseDto.success(noticePageInfoResponsDto);
     }
 }
