@@ -8,14 +8,15 @@ import in.attiead.notice.common.exception.ConflictException;
 import in.attiead.notice.common.exception.InternalServerException;
 import in.attiead.notice.common.exception.InvalidException;
 import in.attiead.notice.common.exception.NotFoundException;
-import in.attiead.notice.common.logback.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class GlobalExceptionHandler implements Log {
+@Slf4j
+public class GlobalExceptionHandler {
 
   @ExceptionHandler(
       {
@@ -46,7 +47,7 @@ public class GlobalExceptionHandler implements Log {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ResponseDto<Object>> handleUnhandledException(Exception error) {
-    logger().error(error.getMessage(), error);
+    log.error(error.getMessage(), error);
 
     return createErrorResponse(
         HttpStatus.INTERNAL_SERVER_ERROR,

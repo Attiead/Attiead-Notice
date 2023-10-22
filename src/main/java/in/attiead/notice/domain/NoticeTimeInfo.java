@@ -6,4 +6,7 @@ public record NoticeTimeInfo(
         LocalDateTime createdAt,
         LocalDateTime updatedAt
 ) {
+  public NoticeTimeInfo() {
+    this(null, null);
+  }
 }
