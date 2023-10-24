@@ -1,5 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeContent;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-class NoticeMapper {
+public class NoticeMapper {
 
   NoticeJpaEntity mapToJpaEntity(Notice notice) {
     return NoticeJpaEntity.builder()
@@ -47,6 +48,31 @@ class NoticeMapper {
             )
         )
         .build();
+  }
 
+  public NoticeInfoResponseDto mapToNoticeInfoResponseDto(Notice notice) {
+    return new NoticeInfoResponseDto(
+        notice.getNoticeId().id(),
+        notice.getContent().title(),
+        notice.getContent().content(),
+        notice.getContent().author(),
+        notice.getCategory().name(),
+        notice.getState().name(),
+        notice.getTimeInfo().createdAt(),
+        notice.getTimeInfo().updatedAt()
+    );
+  }
+
+  public NoticeInfoResponseDto mapToNoticeInfoResponseDto(NoticeJpaEntity noticeJpaEntity) {
+    return new NoticeInfoResponseDto(
+        noticeJpaEntity.getId(),
+        noticeJpaEntity.getContent().getTitle(),
+        noticeJpaEntity.getContent().getContent(),
+        noticeJpaEntity.getContent().getAuthor(),
+        noticeJpaEntity.getCategory().name(),
+        noticeJpaEntity.getState().name(),
+        noticeJpaEntity.getCreatedAt(),
+        noticeJpaEntity.getUpdatedAt()
+    );
   }
 }
