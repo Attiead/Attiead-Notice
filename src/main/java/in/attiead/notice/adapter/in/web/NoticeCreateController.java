@@ -1,7 +1,7 @@
 package in.attiead.notice.adapter.in.web;
 
-import in.attiead.notice.adapter.in.dto.CreateNoticeRequestDto;
-import in.attiead.notice.application.port.in.CreateNoticeUseCase;
+import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDto;
+import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import in.attiead.notice.adapter.in.dto.ResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/notices")
-class CreateNoticeController {
+class NoticeCreateController {
 
-    private final CreateNoticeUseCase createNoticeUseCase;
+    private final NoticeCreateUseCase noticeCreateUseCase;
 
     @PostMapping
-    public ResponseDto<Void> createNotice(@Valid @RequestBody CreateNoticeRequestDto createNoticeRequestDto) {
-        createNoticeUseCase.createNotice(createNoticeRequestDto);
+    public ResponseDto<Void> createNotice(@Valid @RequestBody NoticeCreateRequestDto noticeCreateRequestDto) {
+        noticeCreateUseCase.createNotice(noticeCreateRequestDto);
         return ResponseDto.success(null);
     }
 }

@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 public interface GetNoticeInfoPort {
 
-    Notice getSingleNoticeInfo(Notice notice);
+    Notice getNoticeInfo(Notice notice);
 
     Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
 

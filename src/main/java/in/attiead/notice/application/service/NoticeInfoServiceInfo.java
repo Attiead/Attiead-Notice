@@ -2,7 +2,7 @@ package in.attiead.notice.application.service;
 
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.adapter.out.persistence.NoticeMapper;
-import in.attiead.notice.application.port.in.GetNoticeUseCase;
+import in.attiead.notice.application.port.in.NoticeInfoUseCase;
 import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.domain.Notice;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +14,15 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class GetNoticeInfoService implements GetNoticeUseCase {
+public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
 
   private final GetNoticeInfoPort getNoticeInfoPort;
   private final NoticeMapper noticeMapper;
 
   @Override
-  public NoticeInfoResponseDto getSingleNoticeInfo(Long nId) {
+  public NoticeInfoResponseDto getNoticeInfo(Long nId) {
     Notice singleNotice = Notice.onlyId(nId);
-    Notice notice = getNoticeInfoPort.getSingleNoticeInfo(singleNotice);
+    Notice notice = getNoticeInfoPort.getNoticeInfo(singleNotice);
 
     return noticeMapper.mapToNoticeInfoResponseDto(notice);
   }

@@ -4,9 +4,9 @@ import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface GetNoticeUseCase {
+public interface NoticeInfoUseCase {
 
-  NoticeInfoResponseDto getSingleNoticeInfo(Long nId);
+  NoticeInfoResponseDto getNoticeInfo(Long nId);
 
   Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
 

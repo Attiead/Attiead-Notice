@@ -42,7 +42,7 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
-  public Notice getSingleNoticeInfo(Notice notice) {
+  public Notice getNoticeInfo(Notice notice) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
         .findById(notice.getNoticeId().id())
         .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
