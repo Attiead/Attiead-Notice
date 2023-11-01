@@ -38,4 +38,4 @@ jobs:
         name: Cache .gradle
 
       - name: Build
-        run: ./gradlew -s build
+        run: sudo ./gradlew -s build
