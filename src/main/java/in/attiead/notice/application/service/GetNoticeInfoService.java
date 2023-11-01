@@ -21,11 +21,12 @@ public class GetNoticeInfoService implements GetNoticeUseCase {
 
   @Override
   public NoticeInfoResponseDto getSingleNoticeInfo(Long nId) {
-    Notice singleNotice = Notice.onlyId(nId);
-    Notice notice = getNoticeInfoPort.getSingleNoticeInfo(singleNotice);
-
+    Notice.NoticeId noticeId = new Notice.NoticeId(nId);
+    Notice notice = getNoticeInfoPort.getNotice(noticeId);
     return noticeMapper.mapToNoticeInfoResponseDto(notice);
   }
+
+
 
   @Override
   public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {

@@ -9,6 +9,8 @@ public interface GetNoticeInfoPort {
 
     Notice getSingleNoticeInfo(Notice notice);
 
+    Notice getNotice(Notice.NoticeId noticeId);
+
     Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
 
 }

@@ -50,6 +50,14 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
+  public Notice getNotice(NoticeId noticeId) {
+    NoticeJpaEntity noticeJpaEntity = noticeRepository
+            .findById(noticeId.id())
+            .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
+    return noticeMapper.mapToDomainEntity(noticeJpaEntity);
+  }
+
+  @Override
   public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {
     Page<NoticeJpaEntity> noticePageJpaEntity = noticeRepository.findAll(pageable);
     return noticePageJpaEntity.map(noticeMapper::mapToNoticeInfoResponseDto);
