@@ -15,8 +15,8 @@ public class NoticeRemoveService implements NoticeRemoveUseCase {
 
     @Override
     @Transactional
-    public void removeNotice(Long nId) {
-        NoticeId noticeId = new NoticeId(nId);
+    public void removeNotice(Long nid) {
+        NoticeId noticeId = new NoticeId(nid);
         removeNoticePort.deleteNotice(noticeId);
     }
 }

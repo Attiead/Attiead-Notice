@@ -18,6 +18,6 @@ public class NoticeCreateService implements NoticeCreateUseCase {
     @Transactional
     public void createNotice(NoticeCreateRequestDto noticeCreateRequestDto) {
         Notice newNotice = Notice.withoutId(noticeCreateRequestDto.mapToNoticeContent());
-        createNoticePort.createNotice(newNotice);
+        createNoticePort.saveNotice(newNotice);
     }
 }
