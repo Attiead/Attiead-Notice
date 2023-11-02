@@ -43,6 +43,10 @@ dependencies {
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
 }
 
+tasks.named("sonarlintMain") {
+	dependsOn(":copyHTML")
+}
+
 tasks.withType<Test> {
 	useJUnitPlatform()
 }
