@@ -37,7 +37,7 @@ class NoticePersistenceAdapter implements
   public Notice getNoticeById(NoticeId noticeId) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
             .findById(noticeId.id())
-            .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
+            .orElseThrow(() -> new NotFoundException(NotFoundException.NOT_FOUND_JPAENTITY));
     return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 

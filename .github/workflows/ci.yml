@@ -40,6 +40,19 @@ jobs:
       - name: Set up Gradle Permission
         run: chmod +x ./gradlew
 
+#      - name: Publish Spotbugs Results
+#        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+#        with:
+#          name: Spotbugs
+#          path: build/reports/spotbugs/*.xml
+#
+#      - name: Publish Sonarlint Results
+#        uses: jwgmeligmeyling/spotbugs-github-action@v1.2
+#        with:
+#          name: Sonarlint
+#          title: Sonarlint report
+#          path: build/reports/sonarlint/*.xml
+
       - name: Build
         run: ./gradlew -s build -x test
 
