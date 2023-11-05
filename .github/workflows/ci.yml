@@ -54,5 +54,5 @@ jobs:
 #          path: build/reports/sonarlint/*.xml
 
       - name: Build
-        run: ./gradlew -s build -x test
+        run: ./gradlew -s build
 

@@ -7,6 +7,7 @@ import in.attiead.notice.application.port.out.RemoveNoticePort;
 import in.attiead.notice.common.exception.NotFoundException;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
+import in.attiead.notice.domain.exception.NoticeExceptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,7 +38,7 @@ class NoticePersistenceAdapter implements
   public Notice getNoticeById(NoticeId noticeId) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
             .findById(noticeId.id())
-            .orElseThrow(() -> new NotFoundException(NotFoundException.NOT_FOUND_JPAENTITY));
+            .orElseThrow(() -> new NotFoundException(NoticeExceptions.NOT_FOUND_JPA_ENTITY));
     return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 
