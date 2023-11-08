@@ -3,7 +3,7 @@ package in.attiead.notice.adapter.in.dto;
 import in.attiead.notice.domain.NoticeContent;
 import jakarta.validation.constraints.NotBlank;
 
-public record CreateNoticeRequestDto(
+public record NoticeCreateRequestDto(
         @NotBlank String title,
         @NotBlank String content,
         @NotBlank String author

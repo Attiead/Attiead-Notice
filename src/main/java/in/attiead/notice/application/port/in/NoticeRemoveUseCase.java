@@ -1,6 +1,6 @@
 package in.attiead.notice.application.port.in;
 
-public interface RemoveNoticeUseCase {
+public interface NoticeRemoveUseCase {
 
     void removeNotice(Long nid);
 }
