@@ -4,11 +4,10 @@ import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.application.port.out.RemoveNoticePort;
-import in.attiead.notice.application.port.out.UpdateNoticeStatePort;
 import in.attiead.notice.common.exception.NotFoundException;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
-import in.attiead.notice.domain.NoticeState;
+import in.attiead.notice.domain.exception.NoticeExceptions;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,21 +18,15 @@ import org.springframework.stereotype.Component;
 class NoticePersistenceAdapter implements
     CreateNoticePort,
     GetNoticeInfoPort,
-    UpdateNoticeStatePort,
     RemoveNoticePort {
 
   private final NoticeRepository noticeRepository;
   private final NoticeMapper noticeMapper;
 
   @Override
-  public void createNotice(Notice notice) {
+  public void saveNotice(Notice notice) {
     NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToJpaEntity(notice);
     noticeRepository.save(noticeJpaEntity);
-  }
-
-  @Override
-  public Notice updateNoticeState(NoticeState noticeState) {
-    return null;
   }
 
   @Override
@@ -42,18 +35,10 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
-  public Notice getSingleNoticeInfo(Notice notice) {
-    NoticeJpaEntity noticeJpaEntity = noticeRepository
-        .findById(notice.getNoticeId().id())
-        .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
-    return noticeMapper.mapToDomainEntity(noticeJpaEntity);
-  }
-
-  @Override
-  public Notice getNotice(NoticeId noticeId) {
+  public Notice getNoticeById(NoticeId noticeId) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
             .findById(noticeId.id())
-            .orElseThrow(() -> new NotFoundException("noticeJpaEntity not found"));
+            .orElseThrow(() -> new NotFoundException(NoticeExceptions.NOT_FOUND_JPA_ENTITY.getMessage()));
     return noticeMapper.mapToDomainEntity(noticeJpaEntity);
   }
 

@@ -31,8 +31,8 @@ public class Notice {
         this.timeInfo = noticeTimeInfo;
     }
 
-    public static Notice onlyId(Long nId) {
-        return new Notice(new NoticeId(nId));
+    public static Notice onlyId(Long nid) {
+        return new Notice(new NoticeId(nid));
     }
 
     public static Notice withoutId(NoticeContent noticeContent) {
@@ -45,10 +45,6 @@ public class Notice {
         );
     }
 
-    public record NoticeId(Long id) {
-
-    }
-
     public void updateNoticeInfo(
             NoticeContent noticeContent,
             NoticeCategory noticeCategory,
@@ -57,5 +53,9 @@ public class Notice {
         this.category = noticeCategory;
         this.content = noticeContent;
         this.state = noticeState;
+    }
+
+    public record NoticeId(Long id) {
+
     }
 }
