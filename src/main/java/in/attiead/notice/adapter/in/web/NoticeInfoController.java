@@ -26,8 +26,8 @@ class NoticeInfoController {
 
   @GetMapping
   public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(@PageableDefault(size = 10) Pageable pageable) {
-      Page<NoticeInfoResponseDto> noticePageInfoResponsDto = noticeInfoUseCase.getNotices(pageable);
-      return ResponseDto.success(noticePageInfoResponsDto);
+    Page<NoticeInfoResponseDto> noticePageInfoResponseDto = noticeInfoUseCase.getNotices(pageable);
+    return ResponseDto.success(noticePageInfoResponseDto);
   }
 
   @PatchMapping
