@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/notices")
 class NoticeRemoveController {
 
-    private final NoticeRemoveUseCase noticeRemoveUseCase;
+  private final NoticeRemoveUseCase noticeRemoveUseCase;
 
-    @DeleteMapping("/{nid}")
-    public ResponseDto<Void> removeNotice(@PathVariable Long nid) {
-        noticeRemoveUseCase.removeNotice(nid);
-        return ResponseDto.success(null);
-    }
+  @DeleteMapping("/{nid}")
+  public ResponseDto<Void> removeNotice(@PathVariable Long nid) {
+    noticeRemoveUseCase.removeNotice(nid);
+    return ResponseDto.success(null);
+  }
 }
