@@ -4,10 +4,6 @@ import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDTO;
 import in.attiead.notice.adapter.in.dto.ResponseDTO;
 import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import jakarta.validation.Valid;
-import java.io.File;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,4 +27,3 @@ class NoticeCreateController {
     return ResponseDTO.success(null);
   }
 }
-
