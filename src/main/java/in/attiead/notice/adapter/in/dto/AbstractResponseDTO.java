@@ -6,9 +6,9 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public abstract class AbstractResponseDto<T> {
+public abstract class AbstractResponseDTO<T> {
 
-    private final Meta meta;
-    private final T data;
+  private final Meta meta;
+  private final T data;
 
 }

@@ -1,8 +1,8 @@
 package in.attiead.notice.adapter.in.web;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
-import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDto;
-import in.attiead.notice.adapter.in.dto.ResponseDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
+import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDTO;
+import in.attiead.notice.adapter.in.dto.ResponseDTO;
 import in.attiead.notice.application.port.in.NoticeInfoUseCase;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,21 +19,21 @@ class NoticeInfoController {
   private final NoticeInfoUseCase noticeInfoUseCase;
 
   @GetMapping("/{nid}")
-  public ResponseDto<NoticeInfoResponseDto> getNoticeInfo(@PathVariable Long nid) {
-    NoticeInfoResponseDto noticeInfoResponseDto = noticeInfoUseCase.getNoticeInfo(nid);
-    return ResponseDto.success(noticeInfoResponseDto);
+  public ResponseDTO<NoticeInfoResponseDTO> getNoticeInfo(@PathVariable Long nid) {
+    NoticeInfoResponseDTO noticeInfoResponseDto = noticeInfoUseCase.getNoticeInfo(nid);
+    return ResponseDTO.success(noticeInfoResponseDto);
   }
 
   @GetMapping
-  public ResponseDto<Page<NoticeInfoResponseDto>> getNotices(@PageableDefault(size = 10) Pageable pageable) {
-    Page<NoticeInfoResponseDto> noticePageInfoResponseDto = noticeInfoUseCase.getNotices(pageable);
-    return ResponseDto.success(noticePageInfoResponseDto);
+  public ResponseDTO<Page<NoticeInfoResponseDTO>> getNotices(@PageableDefault(size = 10) Pageable pageable) {
+    Page<NoticeInfoResponseDTO> noticePageInfoResponseDto = noticeInfoUseCase.getNotices(pageable);
+    return ResponseDTO.success(noticePageInfoResponseDto);
   }
 
   @PatchMapping
-  public ResponseDto<NoticeInfoResponseDto> updateNoticeInfo(@Valid @RequestBody NoticeUpdateRequestDto noticeUpdateRequestDto) {
+  public ResponseDTO<NoticeInfoResponseDTO> updateNoticeInfo(@Valid @RequestBody NoticeUpdateRequestDTO noticeUpdateRequestDto) {
     noticeInfoUseCase.updateNoticeInfo(noticeUpdateRequestDto);
-    NoticeInfoResponseDto updateInfo = noticeInfoUseCase.getNoticeInfo(noticeUpdateRequestDto.nid());
-    return ResponseDto.success(updateInfo);
+    NoticeInfoResponseDTO updateInfo = noticeInfoUseCase.getNoticeInfo(noticeUpdateRequestDto.nid());
+    return ResponseDTO.success(updateInfo);
   }
 }

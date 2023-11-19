@@ -1,6 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeContent;
@@ -50,8 +50,8 @@ public class NoticeMapper {
         .build();
   }
 
-  public NoticeInfoResponseDto mapToNoticeInfoResponseDto(Notice notice) {
-    return new NoticeInfoResponseDto(
+  public NoticeInfoResponseDTO mapToNoticeInfoResponseDto(Notice notice) {
+    return new NoticeInfoResponseDTO(
         notice.getNoticeId().id(),
         notice.getContent().title(),
         notice.getContent().content(),
@@ -63,8 +63,8 @@ public class NoticeMapper {
     );
   }
 
-  public NoticeInfoResponseDto mapToNoticeInfoResponseDto(NoticeJpaEntity noticeJpaEntity) {
-    return new NoticeInfoResponseDto(
+  public NoticeInfoResponseDTO mapToNoticeInfoResponseDto(NoticeJpaEntity noticeJpaEntity) {
+    return new NoticeInfoResponseDTO(
         noticeJpaEntity.getId(),
         noticeJpaEntity.getContent().getTitle(),
         noticeJpaEntity.getContent().getContent(),

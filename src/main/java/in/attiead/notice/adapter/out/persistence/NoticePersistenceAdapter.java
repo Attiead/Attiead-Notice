@@ -1,6 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.application.port.out.RemoveNoticePort;
@@ -43,7 +43,7 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
-  public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {
+  public Page<NoticeInfoResponseDTO> getNotices(Pageable pageable) {
     Page<NoticeJpaEntity> noticePageJpaEntity = noticeRepository.findAll(pageable);
     return noticePageJpaEntity.map(noticeMapper::mapToNoticeInfoResponseDto);
   }

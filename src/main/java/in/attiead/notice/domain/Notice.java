@@ -1,5 +1,7 @@
 package in.attiead.notice.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -11,6 +13,7 @@ public class Notice {
     private NoticeState state;
     private NoticeCategory category;
     private NoticeTimeInfo timeInfo;
+    private NoticeAttachment noticeAttachment;
 
     public Notice(NoticeId noticeId) {
         this.noticeId = noticeId;
@@ -22,26 +25,31 @@ public class Notice {
             NoticeContent noticeContent,
             NoticeState noticeState,
             NoticeCategory noticeCategory,
-            NoticeTimeInfo noticeTimeInfo
+            NoticeTimeInfo noticeTimeInfo,
+            NoticeAttachment noticeAttachments
     ) {
         this.noticeId = noticeId;
         this.content = noticeContent;
         this.state = noticeState;
         this.category = noticeCategory;
         this.timeInfo = noticeTimeInfo;
+        this.noticeAttachment = noticeAttachments;
     }
 
     public static Notice onlyId(Long nid) {
         return new Notice(new NoticeId(nid));
     }
 
-    public static Notice withoutId(NoticeContent noticeContent) {
+    public static Notice withoutId(
+        NoticeContent noticeContent,
+        NoticeAttachment noticeAttachment) {
         return new Notice(
                 new NoticeId(null),
                 noticeContent,
                 NoticeState.ACTIVE,
                 NoticeCategory.OPERATE,
-                new NoticeTimeInfo()
+                new NoticeTimeInfo(),
+                noticeAttachment
         );
     }
 

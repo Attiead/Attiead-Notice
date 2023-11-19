@@ -3,7 +3,7 @@ package in.attiead.notice.adapter.in.dto;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-public record NoticeInfoResponseDto(
+public record NoticeInfoResponseDTO(
 
         @NotNull Long id,
         @NotNull String title,

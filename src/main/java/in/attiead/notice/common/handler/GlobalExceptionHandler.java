@@ -1,6 +1,6 @@
 package in.attiead.notice.common.handler;
 
-import in.attiead.notice.adapter.in.dto.ResponseDto;
+import in.attiead.notice.adapter.in.dto.ResponseDTO;
 import in.attiead.notice.common.Meta;
 import in.attiead.notice.common.MetaCode;
 import in.attiead.notice.common.exception.BaseHttpException;
@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
           InternalServerException.class
       }
   )
-  public ResponseEntity<ResponseDto<Object>> handleBaseHttpException(BaseHttpException error) {
+  public ResponseEntity<ResponseDTO<Object>> handleBaseHttpException(BaseHttpException error) {
 
     HttpStatus status;
 
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<ResponseDto<Object>> handleUnhandledException(Exception error) {
+  public ResponseEntity<ResponseDTO<Object>> handleUnhandledException(Exception error) {
     log.error(error.getMessage(), error);
 
     return createErrorResponse(
@@ -56,13 +56,13 @@ public class GlobalExceptionHandler {
     );
   }
 
-  private ResponseEntity<ResponseDto<Object>> createErrorResponse(
+  private ResponseEntity<ResponseDTO<Object>> createErrorResponse(
       HttpStatus statusCode,
       String message,
       Object data
   ) {
     MetaCode dtoMetaCode = MetaCode.valueFrom(statusCode);
-    ResponseDto<Object> response = new ResponseDto<>(
+    ResponseDTO<Object> response = new ResponseDTO<>(
         new Meta(
             dtoMetaCode,
             dtoMetaCode.name(),

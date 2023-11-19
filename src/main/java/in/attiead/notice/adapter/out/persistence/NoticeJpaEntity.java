@@ -1,5 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
+import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeCategory;
 import in.attiead.notice.domain.NoticeState;
 import jakarta.persistence.*;

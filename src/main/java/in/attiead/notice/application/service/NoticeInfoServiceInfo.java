@@ -1,7 +1,7 @@
 package in.attiead.notice.application.service;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
-import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
+import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDTO;
 import in.attiead.notice.adapter.out.persistence.NoticeMapper;
 import in.attiead.notice.application.port.in.NoticeInfoUseCase;
 import in.attiead.notice.application.port.out.CreateNoticePort;
@@ -22,24 +22,24 @@ public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
   private final CreateNoticePort createNoticePort;
   private final NoticeMapper noticeMapper;
 
-  @Transactional(readOnly = true)
+  @Transactional
   @Override
-  public NoticeInfoResponseDto getNoticeInfo(Long nid) {
+  public NoticeInfoResponseDTO getNoticeInfo(Long nid) {
     Notice.NoticeId noticeId = new Notice.NoticeId(nid);
     Notice notice = getNoticeInfoPort.getNoticeById(noticeId);
     return noticeMapper.mapToNoticeInfoResponseDto(notice);
   }
 
-  @Transactional(readOnly = true)
+  @Transactional
   @Override
-  public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {
+  public Page<NoticeInfoResponseDTO> getNotices(Pageable pageable) {
     return getNoticeInfoPort.getNotices(pageable);
   }
 
   @Transactional
   @Override
   public void updateNoticeInfo(
-          NoticeUpdateRequestDto updateRequestDto
+          NoticeUpdateRequestDTO updateRequestDto
   ) {
     Notice.NoticeId noticeId = new Notice.NoticeId(updateRequestDto.nid());
     Notice notice = getNoticeInfoPort.getNoticeById(noticeId);
