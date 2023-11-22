@@ -29,11 +29,11 @@ public class NoticeCreateService implements NoticeCreateUseCase {
         byte[] fileContentBytes = files.getBytes();
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         String storedFilename = Arrays.toString(md.digest(fileContentBytes));
-        String savePath = System.getProperty("user.dir") + "\\files";
+        String savePath = System.getProperty("user.dir") + "/files";
         if (!new File(savePath).exists()) {
           new File(savePath).mkdir();
         }
-        String filePath = savePath + "\\" + storedFilename;
+        String filePath = savePath + "/" + storedFilename;
         files.transferTo(new File(filePath));
         Notice newNotice = Notice.withoutId(
             noticeCreateRequestDTO.mapToNoticeContent(),
