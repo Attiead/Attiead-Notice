@@ -15,11 +15,8 @@ public class AttachmentJpaEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "orig_file_name")
-    private String origFilename;
-
-    @Column(name = "stored_file_name")
-    private String storedFilename;
+    @Column(name = "original_file_name")
+    private String originalFileName;
 
     @Column(name = "file_path")
     private String filePath;

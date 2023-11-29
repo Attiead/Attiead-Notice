@@ -1,12 +1,13 @@
 package in.attiead.notice.domain;
 
+import java.util.List;
+
 public record NoticeAttachment(
   Long id,
-  String origFilename,
-  String storedFilename,
-  String filePath
+  List<String> originalFileName,
+  List<String> filePath
 ) {
-  public NoticeAttachment(String origFilename, String storedFilename, String filePath) {
-    this(null, origFilename, storedFilename, filePath);
+  public NoticeAttachment(List<String> originalFileNames, List<String> filePaths) {
+    this(null, originalFileNames, filePaths);
   }
 }

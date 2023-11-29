@@ -4,6 +4,7 @@ import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDTO;
 import in.attiead.notice.adapter.in.dto.ResponseDTO;
 import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ class NoticeCreateController {
   @PostMapping
   public ResponseDTO<Void> createNotice(
       @Valid @RequestBody NoticeCreateRequestDTO noticeCreateRequestDto,
-      @RequestParam(value = "file", required = false) MultipartFile files) {
+      @RequestParam(value = "file", required = false) List<MultipartFile> files) {
     noticeCreateUseCase.createNotice(noticeCreateRequestDto, files);
     return ResponseDTO.success(null);
   }

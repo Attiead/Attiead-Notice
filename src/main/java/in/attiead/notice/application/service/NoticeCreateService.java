@@ -6,9 +6,8 @@ import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.NoticeAttachment;
 import java.io.File;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,26 +21,34 @@ public class NoticeCreateService implements NoticeCreateUseCase {
 
   @Override
   @Transactional
-  public void createNotice(NoticeCreateRequestDTO noticeCreateRequestDTO, MultipartFile files) {
-    if (!files.isEmpty()) {
+  public void createNotice(
+      NoticeCreateRequestDTO noticeCreateRequestDTO,
+      List<MultipartFile> files
+  ) {
+    if (files != null && !files.isEmpty()) {
+      List<String> originalFileNames = new ArrayList<>();
+      String savePath = System.getProperty("user.dir") + "/files";
+      List<String> filePaths = new ArrayList<>();
       try {
-        String origFilename = files.getOriginalFilename();
-        byte[] fileContentBytes = files.getBytes();
-        MessageDigest md = MessageDigest.getInstance("SHA-256");
-        String storedFilename = Arrays.toString(md.digest(fileContentBytes));
-        String savePath = System.getProperty("user.dir") + "/files";
         if (!new File(savePath).exists()) {
           new File(savePath).mkdir();
         }
-        String filePath = savePath + "/" + storedFilename;
-        files.transferTo(new File(filePath));
+
+        for (MultipartFile file : files) {
+          String originalFileName = file.getOriginalFilename();
+          originalFileNames.add(originalFileName);
+          String filePath = savePath + "/" + originalFileName;
+          filePaths.add(filePath);
+          file.transferTo(new File(filePath));
+        }
+
         Notice newNotice = Notice.withoutId(
             noticeCreateRequestDTO.mapToNoticeContent(),
             new NoticeAttachment(
-                origFilename,
-                storedFilename,
-                filePath
-            ));
+                originalFileNames,
+                filePaths
+            )
+        );
         createNoticePort.saveNotice(newNotice);
       } catch (Exception e) {
         throw new RuntimeException(e);
