@@ -7,9 +7,8 @@ import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,8 +21,8 @@ class NoticeCreateController {
 
   @PostMapping
   public ResponseDTO<Void> createNotice(
-      @Valid @RequestBody NoticeCreateRequestDTO noticeCreateRequestDto,
-      @RequestParam(value = "file", required = false) List<MultipartFile> files) {
+      @Valid @RequestPart NoticeCreateRequestDTO noticeCreateRequestDto,
+      @RequestPart(value = "file", required = false) List<MultipartFile> files) {
     noticeCreateUseCase.createNotice(noticeCreateRequestDto, files);
     return ResponseDTO.success(null);
   }

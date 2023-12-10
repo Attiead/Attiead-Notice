@@ -22,7 +22,7 @@ public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
   private final CreateNoticePort createNoticePort;
   private final NoticeMapper noticeMapper;
 
-  @Transactional
+  @Transactional(readOnly = true)
   @Override
   public NoticeInfoResponseDTO getNoticeInfo(Long nid) {
     Notice.NoticeId noticeId = new Notice.NoticeId(nid);
@@ -30,7 +30,7 @@ public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
     return noticeMapper.mapToNoticeInfoResponseDto(notice);
   }
 
-  @Transactional
+  @Transactional(readOnly = true)
   @Override
   public Page<NoticeInfoResponseDTO> getNotices(Pageable pageable) {
     return getNoticeInfoPort.getNotices(pageable);

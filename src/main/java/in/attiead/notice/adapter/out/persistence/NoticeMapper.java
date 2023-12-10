@@ -3,8 +3,11 @@ package in.attiead.notice.adapter.out.persistence;
 import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.Notice.NoticeId;
+import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeTimeInfo;
+import java.util.List;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +15,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class NoticeMapper {
 
-  NoticeJpaEntity mapToJpaEntity(Notice notice) {
+  NoticeJpaEntity mapToNoticeJpaEntity(Notice notice) {
     return NoticeJpaEntity.builder()
         .id(notice.getNoticeId().id())
         .content(
