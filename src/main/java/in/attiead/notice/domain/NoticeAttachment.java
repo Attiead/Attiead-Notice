@@ -3,10 +3,10 @@ package in.attiead.notice.domain;
 public record NoticeAttachment(
     Long id,
     String originalFileName,
-    String filePath
+    String savedFileName
 ) {
 
-  public NoticeAttachment(String originalFileName, String filePath) {
-    this(null, originalFileName, filePath);
+  public NoticeAttachment(String originalFileName, String savedFileName) {
+    this(null, originalFileName, null);
   }
 }

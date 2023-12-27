@@ -234,8 +234,6 @@ gradle-app.setting
 *.hprof
 
 ### Custom
-application.yml
-application-local.yml
 !src/**/out/
 files
 .idea
