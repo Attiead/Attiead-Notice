@@ -40,11 +40,7 @@ public class NoticeJpaEntity extends BaseEntity {
     @Column(name = "notice_state")
     private NoticeState state;
 
-    @OneToMany(mappedBy = "noticeJpaEntity", cascade = CascadeType.ALL)
-    private List<AttachmentJpaEntity> attachments = new ArrayList<>();
+//    @OneToMany(mappedBy = "noticeJpaEntity", cascade = CascadeType.ALL)
+//    private List<AttachmentJpaEntity> attachments = new ArrayList<>();
 
-    public void addAttachment(AttachmentJpaEntity attachmentJpaEntity) {
-        this.attachments.add(attachmentJpaEntity);
-
-    }
 }
