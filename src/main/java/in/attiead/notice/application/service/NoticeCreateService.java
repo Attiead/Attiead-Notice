@@ -3,6 +3,7 @@ package in.attiead.notice.application.service;
 import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDTO;
 import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import in.attiead.notice.application.port.out.CreateNoticePort;
+import in.attiead.notice.common.util.FileUtils;
 import in.attiead.notice.domain.Notice;
 import in.attiead.notice.domain.NoticeAttachment;
 import java.util.List;
@@ -16,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class NoticeCreateService implements NoticeCreateUseCase {
 
   private final CreateNoticePort createNoticePort;
-  private final NoticeAttachmentService noticeAttachmentService;
+  private final FileUtils fileUtils;
 
   @Override
   @Transactional
@@ -26,7 +27,8 @@ public class NoticeCreateService implements NoticeCreateUseCase {
   ) {
     List<NoticeAttachment> noticeAttachments = null;
     if (files != null && !files.isEmpty()) {
-      noticeAttachments = noticeAttachmentService.createAttachment(files);
+      noticeAttachments = NoticeAttachment.createNoticeAttachments(files);
+      fileUtils.saveFileToPath(files);
     }
 
     Notice newNotice = Notice.withoutId(
