@@ -35,7 +35,6 @@ public class FileUtils {
   public void saveFileToPath(MultipartFile file, String saveFileName) {
     try {
       Path path = uploadDir.resolve(saveFileName);
-      Files.createFile(path);
       file.transferTo(path);
     } catch (IOException e) {
       throw new InternalServerException(FileExceptionMessages.FAIL_TO_SAVE_DATA.getMessage());
