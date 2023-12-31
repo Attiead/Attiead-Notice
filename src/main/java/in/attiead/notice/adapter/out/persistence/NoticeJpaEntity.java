@@ -1,6 +1,5 @@
 package in.attiead.notice.adapter.out.persistence;
 
-import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeCategory;
 import in.attiead.notice.domain.NoticeState;
 import jakarta.persistence.CascadeType;
@@ -40,6 +39,8 @@ public class NoticeJpaEntity extends BaseEntity {
     @Column(name = "notice_state")
     private NoticeState state;
 
+    @OneToMany(mappedBy = "noticeJpaEntity", cascade = CascadeType.ALL)
+    private List<AttachmentJpaEntity> attachments = new ArrayList<>();
 
 
 
