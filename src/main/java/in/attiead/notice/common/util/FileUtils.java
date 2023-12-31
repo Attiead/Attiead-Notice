@@ -5,13 +5,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-@Getter
 public class FileUtils {
 
   private final Path uploadDir;
@@ -30,7 +28,7 @@ public class FileUtils {
       if (!Files.exists(uploadDir))
         Files.createDirectories(uploadDir);
     } catch (IOException e) {
-      throw new InternalServerException(FileException.FAIL_TO_SAVE_DATA.getMessage());
+      throw new InternalServerException(FileExceptionMessages.FAIL_TO_SAVE_DATA.getMessage());
     }
   }
 
@@ -40,7 +38,7 @@ public class FileUtils {
       Files.createFile(path);
       file.transferTo(path);
     } catch (IOException e) {
-      throw new InternalServerException(FileException.FAIL_TO_SAVE_DATA.getMessage());
+      throw new InternalServerException(FileExceptionMessages.FAIL_TO_SAVE_DATA.getMessage());
     }
   }
 }

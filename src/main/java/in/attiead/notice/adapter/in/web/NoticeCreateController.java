@@ -22,7 +22,8 @@ class NoticeCreateController {
   @PostMapping
   public ResponseDTO<Void> createNotice(
       @Valid @RequestPart NoticeCreateRequestDTO noticeCreateRequestDto,
-      @RequestPart(value = "file", required = false) List<MultipartFile> files) {
+      @RequestPart(value = "file", required = false) List<MultipartFile> files
+  ) {
     noticeCreateUseCase.createNotice(noticeCreateRequestDto, files);
     return ResponseDTO.success(null);
   }

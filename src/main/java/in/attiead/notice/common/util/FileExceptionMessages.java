@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum FileException {
+public enum FileExceptionMessages {
 
   FAIL_TO_SAVE_DATA("Failed to save file");
 
