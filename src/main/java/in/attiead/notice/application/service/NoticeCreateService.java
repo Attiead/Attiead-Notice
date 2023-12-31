@@ -25,7 +25,7 @@ public class NoticeCreateService implements NoticeCreateUseCase {
       List<MultipartFile> files
   ) {
     List<NoticeAttachment> noticeAttachments = null;
-    if (files != null) {
+    if (files != null && !files.isEmpty()) {
       noticeAttachments = noticeAttachmentService.createAttachment(files);
     }
 
