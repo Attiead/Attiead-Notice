@@ -6,8 +6,8 @@ import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeTimeInfo;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +16,14 @@ import org.springframework.stereotype.Component;
 public class NoticeMapper {
 
   NoticeJpaEntity mapToNoticeJpaEntity(Notice notice) {
+    List<AttachmentJpaEntity> attachments = null;
+    if (notice.getNoticeAttachments() != null) {
+      attachments = notice.getNoticeAttachments()
+          .stream()
+          .map(this::mapToAttachmentJpaEntity)
+          .toList();
+    }
+
     return NoticeJpaEntity.builder()
         .id(notice.getNoticeId().id())
         .content(
@@ -27,10 +35,11 @@ public class NoticeMapper {
         )
         .category(notice.getCategory())
         .state(notice.getState())
+        .attachments(attachments)
         .build();
   }
 
-  Notice mapToDomainEntity(NoticeJpaEntity noticeJpaEntity) {
+  Notice mapToNoticeDomainEntity(NoticeJpaEntity noticeJpaEntity) {
     return Notice.builder()
         .noticeId(
             new NoticeId(noticeJpaEntity.getId())
@@ -50,7 +59,23 @@ public class NoticeMapper {
                 noticeJpaEntity.getUpdatedAt()
             )
         )
+        .noticeAttachments(mapToNoticeAttachment(noticeJpaEntity.getAttachments()))
         .build();
+  }
+
+  List<NoticeAttachment> mapToNoticeAttachment(List<AttachmentJpaEntity> attachmentJpaEntities) {
+    List<NoticeAttachment> noticeAttachments = new ArrayList<>();
+    if (attachmentJpaEntities != null) {
+      for (AttachmentJpaEntity attachmentJpaEntity : attachmentJpaEntities) {
+        NoticeAttachment noticeAttachment = new NoticeAttachment(
+            attachmentJpaEntity.getId(),
+            attachmentJpaEntity.getClientFileName(),
+            attachmentJpaEntity.getClientFileName()
+        );
+        noticeAttachments.add(noticeAttachment);
+      }
+    }
+    return noticeAttachments;
   }
 
   public NoticeInfoResponseDTO mapToNoticeInfoResponseDto(Notice notice) {
@@ -62,7 +87,8 @@ public class NoticeMapper {
         notice.getCategory().name(),
         notice.getState().name(),
         notice.getTimeInfo().createdAt(),
-        notice.getTimeInfo().updatedAt()
+        notice.getTimeInfo().updatedAt(),
+        notice.getNoticeAttachments()
     );
   }
 
@@ -75,7 +101,16 @@ public class NoticeMapper {
         noticeJpaEntity.getCategory().name(),
         noticeJpaEntity.getState().name(),
         noticeJpaEntity.getCreatedAt(),
-        noticeJpaEntity.getUpdatedAt()
+        noticeJpaEntity.getUpdatedAt(),
+        mapToNoticeAttachment(noticeJpaEntity.getAttachments())
     );
+  }
+
+  AttachmentJpaEntity mapToAttachmentJpaEntity(NoticeAttachment noticeAttachment) {
+    return AttachmentJpaEntity.builder()
+        .id(noticeAttachment.id())
+        .clientFileName(noticeAttachment.clientFileName())
+        .serverFileName(noticeAttachment.serverFileName())
+        .build();
   }
 }

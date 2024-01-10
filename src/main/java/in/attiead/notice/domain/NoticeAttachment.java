@@ -6,8 +6,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 public record NoticeAttachment(
     Long id,
-    String originalFileName,
-    String saveFileName
+    String clientFileName,
+    String serverFileName
 ) {
 
   public NoticeAttachment(String originalFileName) {
@@ -17,8 +17,8 @@ public record NoticeAttachment(
   public static List<NoticeAttachment> createNoticeAttachments(List<MultipartFile> files) {
     List<NoticeAttachment> attachments = new ArrayList<>();
     for (MultipartFile file : files) {
-      String originalFilename = file.getOriginalFilename();
-      attachments.add(new NoticeAttachment(originalFilename));
+      String clientFileName = file.getOriginalFilename();
+      attachments.add(new NoticeAttachment(clientFileName));
     }
     return attachments;
   }

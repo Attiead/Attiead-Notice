@@ -42,6 +42,4 @@ public class NoticeJpaEntity extends BaseEntity {
     @OneToMany(mappedBy = "noticeJpaEntity", cascade = CascadeType.ALL)
     private List<AttachmentJpaEntity> attachments = new ArrayList<>();
 
-
-
 }
