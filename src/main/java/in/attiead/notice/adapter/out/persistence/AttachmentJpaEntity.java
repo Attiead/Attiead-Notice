@@ -15,11 +15,11 @@ public class AttachmentJpaEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "client_file_name")
-    private String clientFileName;
-
     @Column(name = "server_file_name")
     private String serverFileName;
+
+    @Column(name = "file_path")
+    private String filePath;
 
     @ManyToOne
     @JoinColumn(name = "notice_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))

@@ -21,13 +21,13 @@ class NoticePersistenceAdapter implements
     RemoveNoticePort {
 
   private final NoticeRepository noticeRepository;
-  private final NoticeAttachmentRepository noticeAttachmentRepository;
   private final NoticeMapper noticeMapper;
 
   @Override
   public void saveNotice(Notice notice) {
     NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToNoticeJpaEntity(notice);
     noticeRepository.save(noticeJpaEntity);
+
   }
 
   @Override

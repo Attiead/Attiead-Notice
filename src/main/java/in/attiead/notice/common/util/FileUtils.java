@@ -1,60 +1,52 @@
 package in.attiead.notice.common.util;
 
 import in.attiead.notice.common.exception.InternalServerException;
+import in.attiead.notice.domain.NoticeAttachment;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
+import org.springframework.data.util.Pair;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
+@Component
 public class FileUtils {
 
-  private final Path uploadDir;
+  private final Path uploadDirectory;
 
-  public FileUtils(@Value("${upload.path}") String uploadDir) {
-    Path path = Paths.get(uploadDir);
+  public FileUtils(@Value("${upload.path}") String uploadDirectory) {
+    Path path = Paths.get(uploadDirectory);
     if (!path.isAbsolute()) {
       path = path.toAbsolutePath().normalize();
     }
-    this.uploadDir = path;
+    this.uploadDirectory = path;
     init();
   }
 
   private void init() {
     try {
-      if (!Files.exists(uploadDir))
-        Files.createDirectories(uploadDir);
+      if (!Files.exists(uploadDirectory)) {
+        Files.createDirectories(uploadDirectory);
+      }
     } catch (IOException e) {
       throw new InternalServerException(FileExceptionMessages.FAIL_TO_SAVE_DATA.getMessage());
     }
   }
 
-  public void saveFileToPath(List<MultipartFile> files) {
+  public Pair<String, String> saveFileToPath(MultipartFile file) {
+    String serverFileName = UUID.randomUUID().toString();
+    Path path = uploadDirectory.resolve(serverFileName);
     try {
-      for (MultipartFile file : files) {
-        String originalFilename = file.getOriginalFilename();
-        String saveFileName = generateSaveFileName(originalFilename);
-        Path path = uploadDir.resolve(saveFileName);
-        file.transferTo(path);
-      }
+      file.transferTo(path);
     } catch (IOException e) {
       throw new InternalServerException(FileExceptionMessages.FAIL_TO_SAVE_DATA.getMessage());
     }
-  }
-
-  private String generateSaveFileName(String originalFilename) {
-    String extension = "";
-    if (originalFilename != null) {
-      int lastIndex = originalFilename.lastIndexOf(".");
-      if (lastIndex != -1) {
-        extension = originalFilename.substring(lastIndex);
-      }
-    }
-    return UUID.randomUUID() + extension;
+    return Pair.of(serverFileName, path.toString());
   }
 }

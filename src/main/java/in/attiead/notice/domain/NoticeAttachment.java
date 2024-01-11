@@ -1,25 +1,20 @@
 package in.attiead.notice.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.util.Pair;
 
 public record NoticeAttachment(
     Long id,
-    String clientFileName,
-    String serverFileName
+    String serverFileName,
+    String filePath
 ) {
 
-  public NoticeAttachment(String originalFileName) {
-    this(null, originalFileName, null);
+  public NoticeAttachment(String serverFileName, String filePath) {
+    this(null, serverFileName, filePath);
   }
 
-  public static List<NoticeAttachment> createNoticeAttachments(List<MultipartFile> files) {
-    List<NoticeAttachment> attachments = new ArrayList<>();
-    for (MultipartFile file : files) {
-      String clientFileName = file.getOriginalFilename();
-      attachments.add(new NoticeAttachment(clientFileName));
-    }
-    return attachments;
+  public static NoticeAttachment createNoticeAttachment(Pair<String, String> noticeAttachmentInfo) {
+    String serverFileName = noticeAttachmentInfo.getFirst();
+    String filePath = noticeAttachmentInfo.getSecond();
+    return new NoticeAttachment(serverFileName,filePath);
   }
 }

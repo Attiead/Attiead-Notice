@@ -6,6 +6,7 @@ import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeTimeInfo;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -16,14 +17,15 @@ import org.springframework.stereotype.Component;
 public class NoticeMapper {
 
   NoticeJpaEntity mapToNoticeJpaEntity(Notice notice) {
-    List<AttachmentJpaEntity> attachments = null;
+  /*
+    List<AttachmentJpaEntity> attachments = new ArrayList<>();
     if (notice.getNoticeAttachments() != null) {
       attachments = notice.getNoticeAttachments()
           .stream()
           .map(this::mapToAttachmentJpaEntity)
           .toList();
     }
-
+  */
     return NoticeJpaEntity.builder()
         .id(notice.getNoticeId().id())
         .content(
@@ -35,9 +37,10 @@ public class NoticeMapper {
         )
         .category(notice.getCategory())
         .state(notice.getState())
-        .attachments(attachments)
         .build();
   }
+
+
 
   Notice mapToNoticeDomainEntity(NoticeJpaEntity noticeJpaEntity) {
     return Notice.builder()
@@ -66,14 +69,14 @@ public class NoticeMapper {
   List<NoticeAttachment> mapToNoticeAttachment(List<AttachmentJpaEntity> attachmentJpaEntities) {
     List<NoticeAttachment> noticeAttachments = new ArrayList<>();
     if (attachmentJpaEntities != null) {
-      for (AttachmentJpaEntity attachmentJpaEntity : attachmentJpaEntities) {
+      attachmentJpaEntities.forEach(attachmentJpaEntity -> {
         NoticeAttachment noticeAttachment = new NoticeAttachment(
             attachmentJpaEntity.getId(),
-            attachmentJpaEntity.getClientFileName(),
-            attachmentJpaEntity.getClientFileName()
+            attachmentJpaEntity.getServerFileName(),
+            attachmentJpaEntity.getFilePath()
         );
         noticeAttachments.add(noticeAttachment);
-      }
+      });
     }
     return noticeAttachments;
   }
@@ -109,8 +112,8 @@ public class NoticeMapper {
   AttachmentJpaEntity mapToAttachmentJpaEntity(NoticeAttachment noticeAttachment) {
     return AttachmentJpaEntity.builder()
         .id(noticeAttachment.id())
-        .clientFileName(noticeAttachment.clientFileName())
         .serverFileName(noticeAttachment.serverFileName())
+        .filePath(noticeAttachment.filePath())
         .build();
   }
 }

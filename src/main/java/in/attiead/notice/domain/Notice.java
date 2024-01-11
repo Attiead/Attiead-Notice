@@ -39,17 +39,14 @@ public class Notice {
         return new Notice(new NoticeId(nid));
     }
 
-    public static Notice withoutId(
-        NoticeContent noticeContent,
-        List<NoticeAttachment> noticeAttachments
-    ) {
+    public static Notice withoutId(NoticeContent noticeContent) {
         return new Notice(
                 new NoticeId(null),
                 noticeContent,
                 NoticeState.ACTIVE,
                 NoticeCategory.OPERATE,
                 new NoticeTimeInfo(),
-                noticeAttachments
+                null
         );
     }
 
