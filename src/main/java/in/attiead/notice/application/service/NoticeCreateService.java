@@ -29,19 +29,22 @@ public class NoticeCreateService implements NoticeCreateUseCase {
       NoticeCreateRequestDTO noticeCreateRequestDTO,
       List<MultipartFile> files
   ) {
-    List<NoticeAttachment> noticeAttachments = new ArrayList<>();
-    if (files != null && !files.isEmpty()) {
-      files.forEach(file -> {
-        Pair<String, String> noticeAttachmentInfo = fileUtils.saveFileToPath(file);
-        NoticeAttachment noticeAttachment = NoticeAttachment.createNoticeAttachment(noticeAttachmentInfo);
-        noticeAttachments.add(noticeAttachment);
-      });
-    }
-    Notice newNotice = Notice.withoutId(
-        noticeCreateRequestDTO.mapToNoticeContent()
-    );
+    Notice newNotice = Notice.withoutId(noticeCreateRequestDTO.mapToNoticeContent());
     createNoticePort.saveNotice(newNotice);
-    crudNoticeAttachmentPort.saveNoticeAttachment(noticeAttachments);
+
+    if (files != null && !files.isEmpty()) {
+      createNoticeAttachment(files);
+    }
   }
 
+  private void createNoticeAttachment(List<MultipartFile> files) {
+    List<NoticeAttachment> noticeAttachments = new ArrayList<>();
+    files.forEach(file -> {
+      Pair<String, String> noticeAttachmentInfo = fileUtils.saveFileToPath(file);
+      NoticeAttachment noticeAttachment = NoticeAttachment.createNoticeAttachment(
+          noticeAttachmentInfo);
+      noticeAttachments.add(noticeAttachment);
+    });
+    crudNoticeAttachmentPort.saveNoticeAttachment(noticeAttachments);
+  }
 }
