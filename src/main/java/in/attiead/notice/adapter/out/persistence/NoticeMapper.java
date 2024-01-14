@@ -6,7 +6,6 @@ import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeAttachment;
 import in.attiead.notice.domain.NoticeContent;
 import in.attiead.notice.domain.NoticeTimeInfo;
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +30,6 @@ public class NoticeMapper {
         .attachments(new ArrayList<>())
         .build();
   }
-
-
 
   Notice mapToNoticeDomainEntity(NoticeJpaEntity noticeJpaEntity) {
     return Notice.builder()

@@ -2,14 +2,11 @@ package in.attiead.notice.application.service;
 
 import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDTO;
 import in.attiead.notice.adapter.out.persistence.NoticeJpaEntity;
-import in.attiead.notice.adapter.out.persistence.NoticeMapper;
 import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.CrudNoticeAttachmentPort;
-import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.common.util.FileUtils;
 import in.attiead.notice.domain.Notice;
-import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeAttachment;
 import java.util.ArrayList;
 import java.util.List;
