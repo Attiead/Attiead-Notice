@@ -25,4 +25,13 @@ public class AttachmentJpaEntity extends BaseEntity {
     @JoinColumn(name = "notice_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private NoticeJpaEntity noticeJpaEntity;
 
+    public void updateNoticeAttachment(
+        NoticeJpaEntity noticeJpaEntity
+    ) {
+        if(this.noticeJpaEntity != null) {
+            this.noticeJpaEntity.getAttachments().remove(this);
+        }
+        this.noticeJpaEntity = noticeJpaEntity;
+        this.noticeJpaEntity.getAttachments().add(this);
+    }
 }

@@ -26,7 +26,7 @@ public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
   @Override
   public NoticeInfoResponseDTO getNoticeInfo(Long nid) {
     Notice.NoticeId noticeId = new Notice.NoticeId(nid);
-    Notice notice = getNoticeInfoPort.getNoticeById(noticeId);
+    Notice notice = getNoticeInfoPort.getNoticeByNoticeId(noticeId);
     return noticeMapper.mapToNoticeInfoResponseDto(notice);
   }
 
@@ -42,7 +42,7 @@ public class NoticeInfoServiceInfo implements NoticeInfoUseCase {
           NoticeUpdateRequestDTO updateRequestDto
   ) {
     Notice.NoticeId noticeId = new Notice.NoticeId(updateRequestDto.nid());
-    Notice notice = getNoticeInfoPort.getNoticeById(noticeId);
+    Notice notice = getNoticeInfoPort.getNoticeByNoticeId(noticeId);
     notice.updateNoticeInfo(
             new NoticeContent(
                     updateRequestDto.title(),

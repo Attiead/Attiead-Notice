@@ -14,12 +14,18 @@ class NoticeAttachmentPersistenceAdapter implements CrudNoticeAttachmentPort {
   private final NoticeMapper noticeMapper;
 
   @Override
-  public void saveNoticeAttachment(List<NoticeAttachment> noticeAttachments) {
-    noticeAttachments.forEach(noticeAttachment -> {
-      AttachmentJpaEntity attachmentJpaEntity = noticeMapper.mapToAttachmentJpaEntity(
-          noticeAttachment);
-      noticeAttachmentRepository.save(attachmentJpaEntity);
-    });
+  public void saveNoticeAttachment(
+      List<NoticeAttachment> noticeAttachments,
+      NoticeJpaEntity noticeJpaEntity
+  ) {
+    List<AttachmentJpaEntity> attachmentJpaEntities = noticeAttachments.stream()
+        .map(noticeAttachment -> {
+          AttachmentJpaEntity attachmentJpaEntity = noticeMapper.mapToAttachmentJpaEntity(
+              noticeAttachment);
+          attachmentJpaEntity.updateNoticeAttachment(noticeJpaEntity);
+          return attachmentJpaEntity;
+        }).toList();
+    noticeAttachmentRepository.saveAll(attachmentJpaEntities);
   }
 
   @Override

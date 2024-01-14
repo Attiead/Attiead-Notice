@@ -17,15 +17,6 @@ import org.springframework.stereotype.Component;
 public class NoticeMapper {
 
   NoticeJpaEntity mapToNoticeJpaEntity(Notice notice) {
-  /*
-    List<AttachmentJpaEntity> attachments = new ArrayList<>();
-    if (notice.getNoticeAttachments() != null) {
-      attachments = notice.getNoticeAttachments()
-          .stream()
-          .map(this::mapToAttachmentJpaEntity)
-          .toList();
-    }
-  */
     return NoticeJpaEntity.builder()
         .id(notice.getNoticeId().id())
         .content(
@@ -37,6 +28,7 @@ public class NoticeMapper {
         )
         .category(notice.getCategory())
         .state(notice.getState())
+        .attachments(new ArrayList<>())
         .build();
   }
 
@@ -111,7 +103,6 @@ public class NoticeMapper {
 
   AttachmentJpaEntity mapToAttachmentJpaEntity(NoticeAttachment noticeAttachment) {
     return AttachmentJpaEntity.builder()
-        .id(noticeAttachment.id())
         .serverFileName(noticeAttachment.serverFileName())
         .filePath(noticeAttachment.filePath())
         .build();

@@ -4,6 +4,7 @@ import in.attiead.notice.domain.NoticeContent;
 import jakarta.validation.constraints.NotBlank;
 
 public record NoticeCreateRequestDTO(
+        String nid,
         @NotBlank String title,
         @NotBlank String content,
         @NotBlank String author

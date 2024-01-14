@@ -1,11 +1,15 @@
 package in.attiead.notice.application.service;
 
 import in.attiead.notice.adapter.in.dto.NoticeCreateRequestDTO;
+import in.attiead.notice.adapter.out.persistence.NoticeJpaEntity;
+import in.attiead.notice.adapter.out.persistence.NoticeMapper;
 import in.attiead.notice.application.port.in.NoticeCreateUseCase;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.CrudNoticeAttachmentPort;
+import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.common.util.FileUtils;
 import in.attiead.notice.domain.Notice;
+import in.attiead.notice.domain.Notice.NoticeId;
 import in.attiead.notice.domain.NoticeAttachment;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,14 +34,16 @@ public class NoticeCreateService implements NoticeCreateUseCase {
       List<MultipartFile> files
   ) {
     Notice newNotice = Notice.withoutId(noticeCreateRequestDTO.mapToNoticeContent());
-    createNoticePort.saveNotice(newNotice);
-
+    NoticeJpaEntity noticeJpaEntity = createNoticePort.saveNotice(newNotice);
     if (files != null && !files.isEmpty()) {
-      createNoticeAttachment(files);
+      createNoticeAttachment(files, noticeJpaEntity);
     }
   }
 
-  private void createNoticeAttachment(List<MultipartFile> files) {
+  private void createNoticeAttachment(
+      List<MultipartFile> files,
+      NoticeJpaEntity noticeJpaEntity
+  ) {
     List<NoticeAttachment> noticeAttachments = new ArrayList<>();
     files.forEach(file -> {
       Pair<String, String> noticeAttachmentInfo = fileUtils.saveFileToPath(file);
@@ -45,6 +51,6 @@ public class NoticeCreateService implements NoticeCreateUseCase {
           noticeAttachmentInfo);
       noticeAttachments.add(noticeAttachment);
     });
-    crudNoticeAttachmentPort.saveNoticeAttachment(noticeAttachments);
+    crudNoticeAttachmentPort.saveNoticeAttachment(noticeAttachments, noticeJpaEntity);
   }
 }

@@ -24,10 +24,9 @@ class NoticePersistenceAdapter implements
   private final NoticeMapper noticeMapper;
 
   @Override
-  public void saveNotice(Notice notice) {
+  public NoticeJpaEntity saveNotice(Notice notice) {
     NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToNoticeJpaEntity(notice);
-    noticeRepository.save(noticeJpaEntity);
-
+    return noticeRepository.save(noticeJpaEntity);
   }
 
   @Override
@@ -36,7 +35,7 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
-  public Notice getNoticeById(NoticeId noticeId) {
+  public Notice getNoticeByNoticeId(NoticeId noticeId) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
             .findById(noticeId.id())
             .orElseThrow(() -> new NotFoundException(NoticeExceptions.NOT_FOUND_JPA_ENTITY.getMessage()));
