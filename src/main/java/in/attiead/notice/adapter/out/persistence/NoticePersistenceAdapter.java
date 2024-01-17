@@ -1,6 +1,6 @@
 package in.attiead.notice.adapter.out.persistence;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
 import in.attiead.notice.application.port.out.CreateNoticePort;
 import in.attiead.notice.application.port.out.GetNoticeInfoPort;
 import in.attiead.notice.application.port.out.RemoveNoticePort;
@@ -24,9 +24,9 @@ class NoticePersistenceAdapter implements
   private final NoticeMapper noticeMapper;
 
   @Override
-  public void saveNotice(Notice notice) {
-    NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToJpaEntity(notice);
-    noticeRepository.save(noticeJpaEntity);
+  public NoticeJpaEntity saveNotice(Notice notice) {
+    NoticeJpaEntity noticeJpaEntity = noticeMapper.mapToNoticeJpaEntity(notice);
+    return noticeRepository.save(noticeJpaEntity);
   }
 
   @Override
@@ -35,15 +35,15 @@ class NoticePersistenceAdapter implements
   }
 
   @Override
-  public Notice getNoticeById(NoticeId noticeId) {
+  public Notice getNoticeByNoticeId(NoticeId noticeId) {
     NoticeJpaEntity noticeJpaEntity = noticeRepository
             .findById(noticeId.id())
             .orElseThrow(() -> new NotFoundException(NoticeExceptions.NOT_FOUND_JPA_ENTITY.getMessage()));
-    return noticeMapper.mapToDomainEntity(noticeJpaEntity);
+    return noticeMapper.mapToNoticeDomainEntity(noticeJpaEntity);
   }
 
   @Override
-  public Page<NoticeInfoResponseDto> getNotices(Pageable pageable) {
+  public Page<NoticeInfoResponseDTO> getNotices(Pageable pageable) {
     Page<NoticeJpaEntity> noticePageJpaEntity = noticeRepository.findAll(pageable);
     return noticePageJpaEntity.map(noticeMapper::mapToNoticeInfoResponseDto);
   }

@@ -1,16 +1,16 @@
 package in.attiead.notice.application.port.in;
 
-import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDto;
-import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDto;
+import in.attiead.notice.adapter.in.dto.NoticeInfoResponseDTO;
+import in.attiead.notice.adapter.in.dto.NoticeUpdateRequestDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface NoticeInfoUseCase {
 
-  NoticeInfoResponseDto getNoticeInfo(Long nid);
+  NoticeInfoResponseDTO getNoticeInfo(Long nid);
 
-  Page<NoticeInfoResponseDto> getNotices(Pageable pageable);
+  Page<NoticeInfoResponseDTO> getNotices(Pageable pageable);
 
-  void updateNoticeInfo(NoticeUpdateRequestDto noticeUpdateRequestDto);
+  void updateNoticeInfo(NoticeUpdateRequestDTO noticeUpdateRequestDto);
 
 }

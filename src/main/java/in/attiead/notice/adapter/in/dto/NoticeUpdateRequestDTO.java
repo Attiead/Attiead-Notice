@@ -4,7 +4,7 @@ import in.attiead.notice.domain.NoticeCategory;
 import in.attiead.notice.domain.NoticeState;
 import jakarta.annotation.Nullable;
 
-public record NoticeUpdateRequestDto(
+public record NoticeUpdateRequestDTO(
 
         long nid,
         @Nullable String title,

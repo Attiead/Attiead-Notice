@@ -1,9 +1,12 @@
 package in.attiead.notice.adapter.in.dto;
 
+import in.attiead.notice.domain.NoticeAttachment;
+import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
-public record NoticeInfoResponseDto(
+public record NoticeInfoResponseDTO(
 
         @NotNull Long id,
         @NotNull String title,
@@ -12,6 +15,7 @@ public record NoticeInfoResponseDto(
         @NotNull String category,
         @NotNull String state,
         @NotNull LocalDateTime createdAt,
-        @NotNull LocalDateTime updateAt
+        @NotNull LocalDateTime updateAt,
+        List<NoticeAttachment> noticeAttachments
 ) {
 }

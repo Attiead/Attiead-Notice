@@ -233,10 +233,13 @@ gradle-app.setting
 # Java heap dump
 *.hprof
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,intellij+all,java,gradle,visualstudiocode,kotlin
-
 ### Custom
-application.yml
 application-local.yml
 !src/**/out/
+file
+.idea
+
+# End of https://www.toptal.com/developers/gitignore/api/windows,macos,intellij+all,java,gradle,visualstudiocode,kotlin
+
+
 
