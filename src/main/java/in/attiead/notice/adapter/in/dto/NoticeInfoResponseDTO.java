@@ -5,9 +5,10 @@ import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import lombok.Builder;
 
+@Builder
 public record NoticeInfoResponseDTO(
-
         @NotNull Long id,
         @NotNull String title,
         @NotNull String content,

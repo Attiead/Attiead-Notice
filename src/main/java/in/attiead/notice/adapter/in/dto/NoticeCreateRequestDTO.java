@@ -2,7 +2,9 @@ package in.attiead.notice.adapter.in.dto;
 
 import in.attiead.notice.domain.NoticeContent;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Builder;
 
+@Builder
 public record NoticeCreateRequestDTO(
         String nid,
         @NotBlank String title,
