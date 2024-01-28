@@ -35,9 +35,6 @@ dependencies {
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
-
-	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
-	implementation("com.google.guava:guava:31.0.1-jre")
 }
 
 tasks.withType<Test> {
@@ -58,7 +55,7 @@ tasks.asciidoctor {
 	}
 }
 
-val copyDocument by tasks.register<Copy>("copyDocument") { // (12)
+val copyDocument by tasks.register<Copy>("copyDocument") {
 	dependsOn(tasks.asciidoctor)
 	from("build/docs/asciidoc")
 	into("src/main/resources/static/docs")
